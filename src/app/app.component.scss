@@ -17,6 +17,12 @@
   flex-basis: 30%;
 }
 
+.profiles-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
 // (+) add button
 
 .btn-lg {
@@ -30,6 +36,22 @@
     
     padding-bottom: 5px;
     font-size: 35px;
+    font-weight: bold;
+    color:white;
+  }
+}
+
+.btn-profile {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 25px;
+  span {
+    
+    padding-bottom: 5px;
+    font-size: 25px;
     font-weight: bold;
     color:white;
   }

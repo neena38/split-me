@@ -1,0 +1,32 @@
+.profile-wrapper {
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-right: 24px;
+
+  .image-wrapper {
+    position: relative;
+  }
+  img {
+    width: 34px;
+    height: 34px;
+  }
+  span {
+    font-size: 0.8rem;
+  }
+}
+#remove-button {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 18px;
+  height: 18px;
+  opacity: 0.8;
+  &:hover {
+    cursor: pointer;
+    opacity: 1;
+  }
+}

@@ -1,0 +1,29 @@
+.is-invalid{
+    margin: 10px 0px;;
+    color: rgb(156, 3, 3);
+    font-size: 0.8rem;
+    margin: 2px 0px;
+}
+.modal-dialog{
+    width: 275px;
+}
+.modal-header{
+    display: flex;
+    justify-content: center;
+}
+.modal-footer{
+    padding-right:0;
+}
+
+.btn{
+    box-shadow: none;
+    border: 0;  
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.btn-secondary{
+    background-color: #e3ebf7;
+    color: #285192;
+    
+}

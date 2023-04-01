@@ -5,18 +5,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainComponentComponent } from './components/main-component/main-component.component';
 import { FoodItemPanelComponent } from './components/food-item-panel/food-item-panel.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NameProfileComponent } from './components/name-profile/name-profile.component';
+import { CreateProfileModalComponent } from './components/create-profile-modal/create-profile-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainComponentComponent,
-    FoodItemPanelComponent
+    FoodItemPanelComponent,
+    NameProfileComponent,
+    CreateProfileModalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

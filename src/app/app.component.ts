@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { FoodItem } from './classes/food-item';
 import { CreateProfileModalComponent } from './components/create-profile-modal/create-profile-modal.component';
 import { FoodPaletteService } from './services/food-palette.service';
+import { SimpleProfileService } from './services/simple-profile.service';
 
 @Component({
   selector: 'app-root',
@@ -14,11 +15,12 @@ export class AppComponent {
   @ViewChild('ProfileModal') profileModal: CreateProfileModalComponent;
   title = 'split-me';
 
-  profiles: string[] = ['sachin', 'yogesh', 'neena'];
+ 
 
   constructor(
-    private fb: FormBuilder,
-    private foodPalette: FoodPaletteService
+    fb: FormBuilder,
+    private foodPalette: FoodPaletteService,
+    private simpleProfile:SimpleProfileService
   ) {
     this.profileModal = new CreateProfileModalComponent(fb);
   }
@@ -43,16 +45,18 @@ export class AppComponent {
   }
 
   removeProfile(profile: string) {
-    console.log(profile);
-
-    this.profiles = this.profiles.filter((x) => x !== profile);
+   this.simpleProfile.remove(profile);
   }
 
   addNewProfile(profile: string) {
-    this.profiles.push(profile);
+    this.simpleProfile.add(profile)
   }
 
   get palettes(){
     return this.foodPalette.palettes;
+  }
+
+  get profiles(){
+    return this.simpleProfile.profiles;
   }
 }

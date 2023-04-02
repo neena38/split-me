@@ -1,4 +1,4 @@
-<div class="panel mx-5 shadow-sm p-3 mb-3 mt-3 rounded card-container">
+<div cdkDropListGroup class="panel mx-5 shadow-sm p-3 mb-3 mt-3 rounded card-container">
   <img
     id="remove-button"
     src="../../../assets/cancel-icon.svg"
@@ -11,5 +11,7 @@
       >₹ <input [(ngModel)]="foodData.price" (change)="changes()"
     /></span>
   </div>
-  <div class="consumers-palette mx-3 shadow-lg p-3 card-container"></div>
+  <div  [id]="foodData.ID" cdkDropList class="consumers-palette mx-3 shadow-lg p-3 card-container" (cdkDropListDropped)="drop($event)">
+    
+  </div>
 </div>

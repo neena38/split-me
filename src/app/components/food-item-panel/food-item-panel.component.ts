@@ -1,3 +1,4 @@
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FoodItem } from 'src/app/classes/food-item';
 
@@ -8,18 +9,22 @@ import { FoodItem } from 'src/app/classes/food-item';
 })
 export class FoodItemPanelComponent {
   @Input() foodData: FoodItem;
-  @Output() removePanel  = new EventEmitter<FoodItem>();
+  @Output() removePanel = new EventEmitter<FoodItem>();
 
   constructor() {
-    this.foodData = new FoodItem('', 0, []);
+    this.foodData = new FoodItem('undefined',0,[]);
   }
 
-  changes(){
-    console.log("changed");
-    console.log(this.foodData);    
+  changes() {
+    console.log('changed');
+    console.log(this.foodData);
   }
   removePalette() {
     this.removePanel.emit(this.foodData);
-    
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    console.log('got a drop');
+    console.log(event.item.data);
   }
 }

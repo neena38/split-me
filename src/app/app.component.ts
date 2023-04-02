@@ -26,7 +26,10 @@ export class AppComponent {
  
 
   onAddFoodPalette() {
-    this.palettes.push(new FoodItem(this.genRand(5),0,[]));
+    let item:FoodItem =  new FoodItem(this.genRand(5),0,[]);
+    console.log(item.ID);
+    
+    this.palettes.push(item);
     // create a smoother transition for this or discard scroll effect
     setTimeout(
       () =>

@@ -8,6 +8,7 @@ import { FoodItemPanelComponent } from './components/food-item-panel/food-item-p
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NameProfileComponent } from './components/name-profile/name-profile.component';
 import { CreateProfileModalComponent } from './components/create-profile-modal/create-profile-modal.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CreateProfileModalComponent } from './components/create-profile-modal/c
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule, 
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

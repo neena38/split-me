@@ -27,6 +27,7 @@ export class AppComponent {
 
   onAddFoodPalette() {
     this.foodPalette.add();
+    
     // create a smoother transition for this or discard scroll effect
     setTimeout(
       () =>
@@ -58,5 +59,9 @@ export class AppComponent {
 
   get profiles(){
     return this.simpleProfile.profiles;
+  }
+
+  get paletteIDs(){
+    return this.foodPalette.paletteIDs;
   }
 }

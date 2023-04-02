@@ -22,7 +22,7 @@
   </div>
   <div class="people-card mt-3 mx-3 shadow-lg p-3 mb-5 rounded card-container">
     <h3 class="lead" style="text-align: center">Profiles</h3>
-    <div cdkDropList id="profile-wrap-list"  [cdkDropListConnectedTo]="['consumer-list-4']"  class="profiles-wrapper">
+    <div cdkDropList id="profile-wrap-list"  [cdkDropListConnectedTo]="paletteIDs" class="profiles-wrapper">
       <div *ngFor="let profile of profiles" cdkDrag [cdkDragData]="profile">
         <app-name-profile
           [name]="profile"

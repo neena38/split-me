@@ -1,13 +1,35 @@
-<div class="profile-wrapper" [matMenuTriggerFor]="contextMenu">
+<div class="profile-wrapper" (contextmenu)="onContextMenu($event)">
   <span class="name">{{ participant.name }}</span>
   <img src="../../../assets/user-logo-2.png" alt="user.png" />
   <span class="price">₹ {{ participant.contribution }}</span>
 </div>
-
+<div
+  style="visibility: hidden; position: fixed"
+  [style.left]="contextMenuPosition.x"
+  [style.top]="contextMenuPosition.y"
+  [matMenuTriggerFor]="contextMenu"
+></div>
 <!-- context menu -->
 <mat-menu #contextMenu="matMenu">
-	<ng-template matMenuContent let-item="item">
-		<button mat-menu-item (click)="onContextMenuAction(item)">Action 1</button>
-		<button mat-menu-item (click)="onContextMenuAction(item)">Action 2</button>
-	</ng-template>
+  <ng-template matMenuContent let-item="item">
+    <div class="portions">
+      <button (click)="onPortionModifier(0.5)">1/2</button>
+      <button (click)="onPortionModifier(0.3333)">1/3</button>
+      <button (click)="onPortionModifier(0.25)">1/4</button>
+    </div>
+    <div class="custom-input-wrapper">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="custom"
+        (click)="$event.stopPropagation()"
+      />
+      <button class="btn">ok</button>
+    </div>
+    <hr/>
+    <div class="delete-wrapper" (click)="removeParticipant()">
+        <img src="../../../assets/delete-icon.svg" alt="delete.png">
+        <span>Remove</span>
+    </div>
+  </ng-template>
 </mat-menu>

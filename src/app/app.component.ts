@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { FoodItem } from './classes/food-item';
 import { CreateProfileModalComponent } from './components/create-profile-modal/create-profile-modal.component';
+import { FoodPaletteService } from './services/food-palette.service';
 
 @Component({
   selector: 'app-root',
@@ -9,27 +10,21 @@ import { CreateProfileModalComponent } from './components/create-profile-modal/c
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-
-  genRand = (len:number) => {
-    return Math.random().toString(36).substring(2,len+2);
-  }
-
   @ViewChild('itemWrapper') myScrollContainer!: ElementRef;
   @ViewChild('ProfileModal') profileModal: CreateProfileModalComponent;
   title = 'split-me';
-  palettes: FoodItem[] = [new FoodItem(this.genRand(5),0,[])];
-  profiles: string[] = ['sachin','yogesh','neena',];
 
-  constructor(private fb: FormBuilder) {
+  profiles: string[] = ['sachin', 'yogesh', 'neena'];
+
+  constructor(
+    private fb: FormBuilder,
+    private foodPalette: FoodPaletteService
+  ) {
     this.profileModal = new CreateProfileModalComponent(fb);
   }
- 
 
   onAddFoodPalette() {
-    let item:FoodItem =  new FoodItem(this.genRand(5),0,[]);
-    console.log(item.ID);
-    
-    this.palettes.push(item);
+    this.foodPalette.add();
     // create a smoother transition for this or discard scroll effect
     setTimeout(
       () =>
@@ -39,22 +34,25 @@ export class AppComponent {
     );
   }
 
-  onAddProfile(){
+  onAddProfile() {
     this.profileModal.showModal();
   }
 
-  removeFoodTile(item:FoodItem){
-    this.palettes = this.palettes.filter((x)=>x!==item)
+  removeFoodTile(item: FoodItem) {
+    this.foodPalette.remove(item);
   }
 
-  removeProfile(profile:string){
+  removeProfile(profile: string) {
     console.log(profile);
-    
-    this.profiles = this.profiles.filter((x)=>x!==profile) 
+
+    this.profiles = this.profiles.filter((x) => x !== profile);
   }
 
-  addNewProfile(profile:string){
-    this.profiles.push(profile)
+  addNewProfile(profile: string) {
+    this.profiles.push(profile);
+  }
 
+  get palettes(){
+    return this.foodPalette.palettes;
   }
 }

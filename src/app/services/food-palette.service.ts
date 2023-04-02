@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FoodItem } from '../classes/food-item';
+import { Participant } from '../classes/participant';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ export class FoodPaletteService {
       .toString(36)
       .substring(2, len + 2);
   };
-  palettes: FoodItem[] = [new FoodItem(this.genRand(5), 0, [])];
+  palettes: FoodItem[] = [new FoodItem(this.genRand(5), 0, [new Participant('dinesh',0)])];
   paletteIDs: string[]=[];
 
   constructor() {

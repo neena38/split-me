@@ -52,8 +52,10 @@
 .consumers-palette {
   flex-grow: 1;
   border-radius: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
-
 
 //cdk drag and drop 
 

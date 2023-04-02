@@ -1,6 +1,7 @@
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FoodItem } from 'src/app/classes/food-item';
+import { Participant } from 'src/app/classes/participant';
 
 @Component({
   selector: 'app-food-item-panel',
@@ -25,6 +26,13 @@ export class FoodItemPanelComponent {
 
   drop(event: CdkDragDrop<string[]>) {
     console.log('got a drop');
+   
     console.log(event.item.data);
+    let participant = new Participant(event.item.data,this.foodData.price);
+    this.foodData.participants.push(participant);
+  }
+
+  get participants(){
+    return this.foodData.participants;
   }
 }

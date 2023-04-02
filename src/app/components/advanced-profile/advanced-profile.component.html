@@ -1,0 +1,13 @@
+<div class="profile-wrapper" [matMenuTriggerFor]="contextMenu">
+  <span class="name">{{ participant.name }}</span>
+  <img src="../../../assets/user-logo-2.png" alt="user.png" />
+  <span class="price">₹ {{ participant.contribution }}</span>
+</div>
+
+<!-- context menu -->
+<mat-menu #contextMenu="matMenu">
+	<ng-template matMenuContent let-item="item">
+		<button mat-menu-item (click)="onContextMenuAction(item)">Action 1</button>
+		<button mat-menu-item (click)="onContextMenuAction(item)">Action 2</button>
+	</ng-template>
+</mat-menu>

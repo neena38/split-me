@@ -1,15 +1,17 @@
+import { Participant } from "./participant";
+
 export class FoodItem {
   static #id = 0;
   private id: number;
   name: string;
   price: number;
-  participants: number[];
+  participants: Participant[];
 
   static #incrementID() {
     this.#id++;
   }
 
-  constructor(name: string, price: number, participants: number[]) {
+  constructor(name: string, price: number, participants: Participant[]) {
     if (name !== 'undefined') {
       FoodItem.#incrementID();
       this.id = FoodItem.#id;

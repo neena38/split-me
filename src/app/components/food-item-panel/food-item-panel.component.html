@@ -12,6 +12,8 @@
     /></span>
   </div>
   <div  [id]="foodData.ID" cdkDropList class="consumers-palette mx-3 shadow-lg p-3 card-container" (cdkDropListDropped)="drop($event)">
-    
+    <div *ngFor="let participant of participants" class="people-palette">
+      <app-advanced-profile [participant]="participant"></app-advanced-profile>
+    </div>
   </div>
 </div>

@@ -25,4 +25,14 @@ export class FoodItem {
   get ID() {
     return 'consumer-list-' + this.id;
   }
+
+  
+  public get totalContributions() : number {
+    let total:number=0;
+    this.participants.forEach(participant => {
+      total+=participant.contribution;
+    }); 
+    return total;
+  }
+  
 }

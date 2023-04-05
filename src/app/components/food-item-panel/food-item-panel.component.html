@@ -1,19 +1,35 @@
-<div class="panel mx-5 shadow-sm p-3 mb-3 mt-3 rounded card-container">
+<div class="panel-wrapper mx-5 shadow-sm  mb-3 mt-3 rounded card-container">
   <img
     id="remove-button"
     src="../../../assets/cancel-icon.svg"
     (click)="removePalette()"
   />
-  <div class="item-info">
-    <input [(ngModel)]="foodData.name" class="dish-name" (change)="changes()" />
-    <img class="dish-logo" src="../../../assets/dish.png" alt="dish.png" />
-    <span class="dish-rate"
-      >₹ <input [(ngModel)]="foodData.price" (change)="changes()"
-    /></span>
-  </div>
-  <div  [id]="foodData.ID" cdkDropList class="consumers-palette mx-3 shadow-lg p-3 card-container" (cdkDropListDropped)="drop($event)">
-    <div *ngFor="let participant of participants" class="people-palette">
-      <app-advanced-profile [participant]="participant" [price]="foodData.price" (removeParticipant)="removeParticipant($event)"></app-advanced-profile>
+  <div class="panel">
+    <div class="item-info">
+      <input
+        [(ngModel)]="foodData.name"
+        class="dish-name"
+        (change)="changes()"
+      />
+      <img class="dish-logo" src="../../../assets/dish.png" alt="dish.png" />
+      <span class="dish-rate"
+        >₹ <input [(ngModel)]="foodData.price" (change)="changes()"
+      /></span>
+    </div>
+    <div
+      [id]="foodData.ID"
+      cdkDropList
+      class="consumers-palette mx-3 shadow-lg p-3 card-container"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div *ngFor="let participant of participants" class="people-palette">
+        <app-advanced-profile
+          [participant]="participant"
+          [price]="foodData.price"
+          (removeParticipant)="removeParticipant($event)"
+        ></app-advanced-profile>
+      </div>
     </div>
   </div>
+  <div class="total-wrapper" >Total : <span class="total-rate shadow-lg">₹ {{this.foodData.totalContributions}}</span> </div>
 </div>

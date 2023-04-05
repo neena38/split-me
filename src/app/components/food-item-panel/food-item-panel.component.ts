@@ -11,6 +11,7 @@ import { Participant } from 'src/app/classes/participant';
 export class FoodItemPanelComponent {
   @Input() foodData: FoodItem;
   @Output() removePanel = new EventEmitter<FoodItem>();
+  totalRate: number = 0;
 
   constructor() {
     this.foodData = new FoodItem('undefined', 0, []);
@@ -40,4 +41,6 @@ export class FoodItemPanelComponent {
   get participants() {
     return this.foodData.participants;
   }
+
+  
 }

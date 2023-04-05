@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { Participant } from 'src/app/classes/participant';
 
@@ -35,7 +41,10 @@ export class AdvancedProfileComponent {
     this.participant.contribution = parseFloat(
       (this.price * modifier).toFixed(2)
     );
-    //TODO also emit to pare for updating
+  }
+
+  updateCustom(value: string) {
+    this.participant.contribution = parseFloat(value);
   }
 
   remove() {

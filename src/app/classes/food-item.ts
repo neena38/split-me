@@ -1,4 +1,4 @@
-import { Participant } from "./participant";
+import { Participant } from './participant';
 
 export class FoodItem {
   static #id = 0;
@@ -26,13 +26,17 @@ export class FoodItem {
     return 'consumer-list-' + this.id;
   }
 
-  
-  public get totalContributions() : number {
-    let total:number=0;
-    this.participants.forEach(participant => {
-      total+=participant.contribution;
-    }); 
+  public get totalContributions(): number {
+    let total: number = 0;
+    this.participants.forEach((participant) => {
+      total += participant.contribution;
+    });
+
     return total;
   }
-  
+  public updatePrices() {
+    this.participants.forEach((participant) => {
+      participant.contribution = this.price;
+    });
+  }
 }

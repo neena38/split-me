@@ -17,9 +17,12 @@ export class FoodItemPanelComponent {
     this.foodData = new FoodItem('undefined', 0, []);
   }
 
-  changes() {
+  changes(type: string) {
     console.log('changed');
     console.log(this.foodData);
+    if (type === 'price') {
+      this.foodData.updatePrices();
+    }
   }
   removePalette() {
     this.removePanel.emit(this.foodData);
@@ -41,6 +44,5 @@ export class FoodItemPanelComponent {
   get participants() {
     return this.foodData.participants;
   }
-
-  
 }
+

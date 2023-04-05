@@ -19,12 +19,13 @@
     </div>
     <div class="custom-input-wrapper">
       <input
+        #customInput
         type="text"
         class="form-control"
         placeholder="custom"
         (click)="$event.stopPropagation()"
       />
-      <button class="btn">ok</button>
+      <button class="btn" (click)="updateCustom(customInput.value)">ok</button>
     </div>
     <hr/>
     <div class="delete-wrapper" (click)="remove()">

@@ -1,4 +1,4 @@
-<div cdkDropListGroup class="panel mx-5 shadow-sm p-3 mb-3 mt-3 rounded card-container">
+<div class="panel mx-5 shadow-sm p-3 mb-3 mt-3 rounded card-container">
   <img
     id="remove-button"
     src="../../../assets/cancel-icon.svg"
@@ -13,7 +13,7 @@
   </div>
   <div  [id]="foodData.ID" cdkDropList class="consumers-palette mx-3 shadow-lg p-3 card-container" (cdkDropListDropped)="drop($event)">
     <div *ngFor="let participant of participants" class="people-palette">
-      <app-advanced-profile [participant]="participant" [price]="foodData.price"></app-advanced-profile>
+      <app-advanced-profile [participant]="participant" [price]="foodData.price" (removeParticipant)="removeParticipant($event)"></app-advanced-profile>
     </div>
   </div>
 </div>

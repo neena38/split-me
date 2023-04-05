@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { Participant } from 'src/app/classes/participant';
 
@@ -10,6 +10,7 @@ import { Participant } from 'src/app/classes/participant';
 export class AdvancedProfileComponent {
   @Input('participant') participant: Participant;
   @Input('price') price: number;
+  @Output() removeParticipant = new EventEmitter<Participant>();
   @ViewChild(MatMenuTrigger)
   contextMenu: MatMenuTrigger | undefined;
 
@@ -37,8 +38,9 @@ export class AdvancedProfileComponent {
     //TODO also emit to pare for updating
   }
 
-  removeParticipant() {
+  remove() {
     console.log('removing participant');
+    this.removeParticipant.emit(this.participant);
   }
 
   onContextMenuAction(item: any) {

@@ -13,7 +13,7 @@ export class FoodItemPanelComponent {
   @Output() removePanel = new EventEmitter<FoodItem>();
 
   constructor() {
-    this.foodData = new FoodItem('undefined',0,[]);
+    this.foodData = new FoodItem('undefined', 0, []);
   }
 
   changes() {
@@ -23,16 +23,21 @@ export class FoodItemPanelComponent {
   removePalette() {
     this.removePanel.emit(this.foodData);
   }
+  removeParticipant(p: Participant) {
+    this.foodData.participants = this.foodData.participants.filter(
+      (x) => x !== p
+    );
+  }
 
   drop(event: CdkDragDrop<string[]>) {
     console.log('got a drop');
-   
+
     console.log(event.item.data);
-    let participant = new Participant(event.item.data,this.foodData.price);
+    let participant = new Participant(event.item.data, this.foodData.price);
     this.foodData.participants.push(participant);
   }
 
-  get participants(){
+  get participants() {
     return this.foodData.participants;
   }
 }

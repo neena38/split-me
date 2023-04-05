@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class SimpleProfileService {
-  profiles: string[] = ['sachin', 'yogesh', 'neena','benjamine'];
+  profiles: string[] = ['sachin', 'leya', 'neena','arthur'];
   constructor() { }
 
   remove(profile:string){

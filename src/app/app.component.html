@@ -1,5 +1,5 @@
 <div id="main-wrapper">
-  <div class="bill-card mt-3 mx-3 shadow-lg p-3 mb-5 rounded card-container">
+  <div class="bill-card mt-3 mx-3 shadow-lg p-3 mb-3 rounded card-container">
     <h3 class="lead" style="text-align: center">Food Palette</h3>
     <div #itemWrapper class="food-items-wrapper">
       <div class="food-items">
@@ -20,42 +20,49 @@
       </div>
     </div>
   </div>
-  <div class="people-card mt-3 mx-3 shadow-lg p-3 mb-5 rounded card-container">
-    <h3 class="lead" style="text-align: center">Profiles</h3>
+  <div class="right-panel mt-3 mx-2">
     <div
-      cdkDropList
-      id="profile-wrap-list"
-      [cdkDropListConnectedTo]="paletteIDs"
-      class="profiles-wrapper"
+      class="people-card  shadow-lg p-3 mb-2 rounded card-container"
     >
-      <div *ngFor="let profile of profiles" cdkDrag [cdkDragData]="profile">
-        <app-name-profile
-          [name]="profile"
-          (removeUser)="removeProfile($event)"
-        ></app-name-profile>
-        <div *cdkDragPreview class="profile-drag-preview">
-          <div class="preview-profile-wrapper">
-            <img src="../../../assets/user.png" alt="user.png" />
-            <span>{{ profile }}</span>
-          </div>
-        </div>
-        <div *cdkDragPlaceholder>
+      <h3 class="lead" style="text-align: center">Profiles</h3>
+      <div
+        cdkDropList
+        id="profile-wrap-list"
+        [cdkDropListConnectedTo]="paletteIDs"
+        class="profiles-wrapper"
+      >
+        <div *ngFor="let profile of profiles" cdkDrag [cdkDragData]="profile">
           <app-name-profile
             [name]="profile"
             (removeUser)="removeProfile($event)"
           ></app-name-profile>
+          <div *cdkDragPreview class="profile-drag-preview">
+            <div class="preview-profile-wrapper">
+              <img src="../../../assets/user.png" alt="user.png" />
+              <span>{{ profile }}</span>
+            </div>
+          </div>
+          <div *cdkDragPlaceholder>
+            <app-name-profile
+              [name]="profile"
+              (removeUser)="removeProfile($event)"
+            ></app-name-profile>
+          </div>
         </div>
-      </div>
 
-      <span style="display: flex; justify-content: center">
-        <button
-          type="button"
-          class="btn btn-info btn-profile"
-          (click)="onAddProfile()"
-        >
-          <span>+</span>
-        </button>
-      </span>
+        <span style="display: flex; justify-content: center">
+          <button
+            type="button"
+            class="btn btn-info btn-profile"
+            (click)="onAddProfile()"
+          >
+            <span>+</span>
+          </button>
+        </span>
+      </div>
+    </div>
+    <div class="details-panel shadow-lg p-3 mb-5 rounded card-container">
+      <h3 class="lead" style="text-align: center">Details</h3>
     </div>
   </div>
   <app-create-profile-modal

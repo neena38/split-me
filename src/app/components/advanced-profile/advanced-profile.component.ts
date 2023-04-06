@@ -44,7 +44,7 @@ export class AdvancedProfileComponent {
   }
 
   updateCustom(value: string) {
-    this.participant.contribution = parseFloat(value);
+    this.participant.contribution = Math.round(parseFloat(value) * 100) / 100;
   }
 
   remove() {

@@ -32,7 +32,7 @@ export class FoodItem {
       total += participant.contribution;
     });
 
-    return total;
+    return Math.round(total * 100) / 100;
   }
   public updatePrices() {
     this.participants.forEach((participant) => {

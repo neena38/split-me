@@ -15,19 +15,17 @@ export class AppComponent {
   @ViewChild('ProfileModal') profileModal: CreateProfileModalComponent;
   title = 'split-me';
 
- 
-
   constructor(
     fb: FormBuilder,
     private foodPalette: FoodPaletteService,
-    private simpleProfile:SimpleProfileService
+    private simpleProfile: SimpleProfileService
   ) {
     this.profileModal = new CreateProfileModalComponent(fb);
   }
 
   onAddFoodPalette() {
     this.foodPalette.add();
-    
+
     // create a smoother transition for this or discard scroll effect
     setTimeout(
       () =>
@@ -35,15 +33,6 @@ export class AppComponent {
           this.myScrollContainer?.nativeElement.scrollHeight),
       50
     );
-  }
-
-  onTaxDiscountChange(tax:string,discount:string) {
-   console.log(tax);
-   console.log(discount);
-   
-   
-    
-    
   }
 
   onAddProfile() {
@@ -55,28 +44,23 @@ export class AppComponent {
   }
 
   removeProfile(profile: string) {
-   this.simpleProfile.remove(profile);
+    this.simpleProfile.remove(profile);
   }
 
   addNewProfile(profile: string) {
-    this.simpleProfile.add(profile)
+    this.simpleProfile.add(profile);
   }
 
-  get palettes(){
+  get palettes() {
     return this.foodPalette.palettes;
   }
 
-  get profiles(){
+  get profiles() {
     return this.simpleProfile.profiles;
   }
 
-  get paletteIDs(){
+  get paletteIDs() {
     return this.foodPalette.paletteIDs;
   }
-
-  get totalFoodBill(){
-    return this.foodPalette.getTotalAmount();
-  }
-
 
 }

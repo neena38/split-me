@@ -12,6 +12,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AdvancedProfileComponent } from './components/advanced-profile/advanced-profile.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMenuModule } from "@angular/material/menu";
+import { TaxDiscountPanelComponent } from './components/tax-discount-panel/tax-discount-panel.component';
+import { DetailsPanelComponent } from './components/details-panel/details-panel.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +21,9 @@ import { MatMenuModule } from "@angular/material/menu";
     FoodItemPanelComponent,
     NameProfileComponent,
     CreateProfileModalComponent,
-    AdvancedProfileComponent
+    AdvancedProfileComponent,
+    TaxDiscountPanelComponent,
+    DetailsPanelComponent
   ],
   imports: [
     BrowserModule,

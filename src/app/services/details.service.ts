@@ -5,29 +5,31 @@ import { FoodPaletteService } from './food-palette.service';
   providedIn: 'root',
 })
 export class DetailsService {
-  tax: number = 0;
-  discount: number = 0;
+  tax: number = 113.15;
+  discount: number = 75;
   totalFoodAmount: number = 0;
   finalTotal: number = 0;
+  contributorsMap: Map<string, number> | undefined;
+  totalAmountMap: Map<string, number> | undefined;
   constructor(private foodPalette: FoodPaletteService) {}
 
   calculateFinalTotal() {
     console.log('tax ' + this.tax);
     console.log('discount ' + this.discount);
-    let totalFoodAmount = this.foodPalette.getTotalAmount();
-    let ContributorsMap = this.foodPalette.getIndividualContributions();
-    console.log(ContributorsMap); // without discount-tax
-    let totalAmountMap = new Map<string, number>();
-    let finalAmt:number=0;
-    for (let [name, money] of ContributorsMap) {
-      let taxAmt = (money / totalFoodAmount) * this.tax;
-      let discAmt = (money / totalFoodAmount) * this.discount;
+    this.totalFoodAmount = this.foodPalette.getTotalAmount();
+    this.contributorsMap = this.foodPalette.getIndividualContributions();
+    //console.log(ContributorsMap); // without discount-tax
+    this.totalAmountMap = new Map<string, number>();
+    let finalAmt: number = 0;
+    for (let [name, money] of this.contributorsMap) {
+      let taxAmt = (money / this.totalFoodAmount) * this.tax;
+      let discAmt = (money / this.totalFoodAmount) * this.discount;
 
       let newAmount = Math.round((money + taxAmt - discAmt) * 100) / 100;
-      finalAmt+=newAmount;
-      totalAmountMap.set(name, newAmount);
+      finalAmt += money + taxAmt - discAmt;
+      this.totalAmountMap.set(name, newAmount);
     }
-    console.log(totalAmountMap);
-    this.finalTotal = finalAmt;
+
+    this.finalTotal = Math.round(finalAmt * 100) / 100;
   }
 }

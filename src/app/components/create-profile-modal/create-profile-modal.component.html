@@ -2,14 +2,19 @@
 <div #Modal id="myModal" class="modal fade" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <div class="modal-header border-0 pb-0" >
+      <div class="modal-header border-0 pb-0">
         <h5 class="modal-title" id="title">Add Profile</h5>
       </div>
       <form [formGroup]="angForm" novalidate>
         <div class="modal-body pb-0">
           <div class="form-group">
             <label>Name:</label>
-            <input class="form-control shadow-none" formControlName="name" type="text" />
+            <input
+              #ModalInput
+              class="form-control shadow-none"
+              formControlName="name"
+              type="text"
+            />
           </div>
           <div
             *ngIf="
@@ -23,8 +28,8 @@
               Name is required.
             </div>
             <div *ngIf="angForm.controls['name'].errors?.['duplicate']">
-                profile already exists.
-              </div>
+              profile already exists.
+            </div>
           </div>
 
           <div class="modal-footer">

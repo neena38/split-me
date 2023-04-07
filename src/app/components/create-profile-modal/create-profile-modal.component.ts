@@ -1,11 +1,19 @@
-import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
   FormGroup,
-  ValidatorFn,
   Validators,
 } from '@angular/forms';
+
 
 import { Modal } from 'bootstrap';
 import { isDuplicateValidator } from 'src/app/classes/validators';
@@ -16,6 +24,8 @@ import { isDuplicateValidator } from 'src/app/classes/validators';
 })
 export class CreateProfileModalComponent implements AfterViewInit {
   @ViewChild('Modal') Modal: any;
+  @ViewChild('ModalInput')
+  ModalInput!: ElementRef;
   @Input('existingProfiles') existingProfiles: string[] = [];
   @Output('addProfile') addProfile = new EventEmitter<string>();
   myModal: any;
@@ -28,8 +38,11 @@ export class CreateProfileModalComponent implements AfterViewInit {
     this.angForm = this.fb.group({
       name: [
         '',
-        [Validators.required,
-          (control: AbstractControl) =>isDuplicateValidator(this.existingProfiles)(control)],
+        [
+          Validators.required,
+          (control: AbstractControl) =>
+            isDuplicateValidator(this.existingProfiles)(control),
+        ],
       ],
     });
   }
@@ -39,18 +52,20 @@ export class CreateProfileModalComponent implements AfterViewInit {
       backdrop: 'static',
       keyboard: false,
     });
-
     console.log('initalized modal');
   }
 
   showModal() {
     this.angForm.reset();
     this.myModal.show();
+    setTimeout(() => {
+      this.ModalInput.nativeElement.focus();
+    }, 500);
+   
   }
- 
-  onSubmit(){
-    this.addProfile.emit(this.angForm.value['name'])
+
+  onSubmit() {
+    this.addProfile.emit(this.angForm.value['name']);
     this.myModal.hide();
   }
-  
 }

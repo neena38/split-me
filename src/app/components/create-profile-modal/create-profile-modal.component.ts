@@ -23,7 +23,7 @@ import { isDuplicateValidator } from 'src/app/classes/validators';
   styleUrls: ['./create-profile-modal.component.scss'],
 })
 export class CreateProfileModalComponent implements AfterViewInit {
-  @ViewChild('Modal') Modal: any;
+  @ViewChild('profileModal') Modal: any;
   @ViewChild('ModalInput')
   ModalInput!: ElementRef;
   @Input('existingProfiles') existingProfiles: string[] = [];
@@ -56,6 +56,8 @@ export class CreateProfileModalComponent implements AfterViewInit {
   }
 
   showModal() {
+    console.log("showing profile modal");
+    
     this.angForm.reset();
     this.myModal.show();
     setTimeout(() => {

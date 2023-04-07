@@ -38,7 +38,6 @@ export class AdvancedProfileComponent {
   }
 
   onPortionModifier(modifier: number) {
-    //TODO 2,3,4
     this.participant.contribution = parseFloat(
       (this.price * modifier).toFixed(2)
     );

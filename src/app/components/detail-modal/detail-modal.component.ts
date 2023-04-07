@@ -1,0 +1,38 @@
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { Modal } from 'bootstrap';
+import { IContributors } from 'src/app/classes/interfaces';
+import { DetailsService } from 'src/app/services/details.service';
+
+@Component({
+  selector: 'app-detail-modal',
+  templateUrl: './detail-modal.component.html',
+  styleUrls: ['./detail-modal.component.scss'],
+})
+export class DetailModalComponent implements AfterViewInit {
+  @ViewChild('DetailModal') Modal: any;
+  @ViewChild(MatSort) sort = new MatSort();
+  myModal: any;
+  dataSource: any;
+
+  constructor(private details: DetailsService) {}
+
+  ngAfterViewInit() {
+    this.myModal = new Modal(this.Modal.nativeElement, {
+      backdrop: 'static',
+      keyboard: true,
+    });
+  }
+
+
+
+  displayedColumns: string[] = ['name', 'food_amount', 'split_amount'];
+
+  showModal() {
+    console.log('showing detail modal');
+    this.dataSource = new MatTableDataSource(this.details.generateDataSourceMap());
+    this.dataSource.sort = this.sort;
+    this.myModal.show();
+  }
+}

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FoodPaletteService } from './food-palette.service';
+import { IContributors } from '../classes/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -31,5 +32,21 @@ export class DetailsService {
     }
 
     this.finalTotal = Math.round(finalAmt * 100) / 100;
+  }
+
+  generateDataSourceMap(): IContributors[] {
+    let ContributorsMap: IContributors[] = [];
+    if (this.contributorsMap && this.totalAmountMap) {
+      for (let [name, money] of this.contributorsMap) {
+        let entry: IContributors = {
+          name: name,
+          food_amount: money,
+          split_amount: this.totalAmountMap.get(name)!,
+        };
+        ContributorsMap.push(entry);
+      }
+    }
+
+    return ContributorsMap;
   }
 }

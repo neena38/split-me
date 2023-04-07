@@ -14,6 +14,9 @@ import { FoodItemPanelComponent } from './components/food-item-panel/food-item-p
 import { MainComponentComponent } from './components/main-component/main-component.component';
 import { NameProfileComponent } from './components/name-profile/name-profile.component';
 import { TaxDiscountPanelComponent } from './components/tax-discount-panel/tax-discount-panel.component';
+import { DetailModalComponent } from './components/detail-modal/detail-modal.component';
+import { MatTableModule } from "@angular/material/table";
+import { MatSortModule } from '@angular/material/sort';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +26,8 @@ import { TaxDiscountPanelComponent } from './components/tax-discount-panel/tax-d
     CreateProfileModalComponent,
     AdvancedProfileComponent,
     TaxDiscountPanelComponent,
-    DetailsPanelComponent
+    DetailsPanelComponent,
+    DetailModalComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +37,8 @@ import { TaxDiscountPanelComponent } from './components/tax-discount-panel/tax-d
     DragDropModule,
     MatMenuModule,
     NoopAnimationsModule,
+    MatTableModule,
+    MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]

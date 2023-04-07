@@ -13,14 +13,44 @@
   height: calc(100% - 30px);
 }
 
-
-.right-panel{
+.right-panel {
   flex-basis: 30%;
   .people-card {
-  
   }
-  .details-panel{
+  .details-panel {
+    .total-amount {
+      font-size:1.1rem;
+      font-weight: 400;
+    }
+    .tax-discount-panel {
+      display: flex;
+      font-size: 1rem;
 
+      .td-panel-item {
+        margin-top: 20px;
+        .td-label {
+          margin-left: 16px;
+        }
+        &:first-child {
+          margin-right: 32px;
+        }
+      }
+      .input-wrap {
+        margin-top: 4px;
+        display: flex;
+        align-items: center;
+        font-size: 1.4rem;
+        input {
+          width: 90px;
+
+          margin-left: 4px;
+          &:focus {
+            outline: none;
+            box-shadow: none;
+          }
+        }
+      }
+    }
   }
 }
 

@@ -21,9 +21,7 @@
     </div>
   </div>
   <div class="right-panel mt-3 mx-2">
-    <div
-      class="people-card  shadow-lg p-3 mb-2 rounded card-container"
-    >
+    <div class="people-card shadow-lg p-3 mb-2 rounded card-container">
       <h3 class="lead" style="text-align: center">Profiles</h3>
       <div
         cdkDropList
@@ -61,8 +59,27 @@
         </span>
       </div>
     </div>
-    <div class="details-panel shadow-lg p-3 mb-5 rounded card-container">
+    <div class="details-panel shadow-lg p-3 mb-5 rounded card-container lead">
       <h3 class="lead" style="text-align: center">Details</h3>
+      <div class="total-amount">total price 💵 : ₹ {{ totalFoodBill }}</div>
+      <div class="tax-discount-panel">
+        <div class="td-panel-item">
+          <span class="td-label">Tax 🧾</span>
+          <span class="input-wrap"
+            >₹<input #taxInp
+              class="form-control"
+              (change)="onTaxDiscountChange(taxInp.value,discountInp.value)"
+          /></span>
+        </div>
+        <div class="td-panel-item">
+          <span class="td-label">Discount 🎟️</span>
+          <span class="input-wrap"
+            >₹<input #discountInp
+              class="form-control"
+              (change)="onTaxDiscountChange(taxInp.value,discountInp.value)"
+          /></span>
+        </div>
+      </div>
     </div>
   </div>
   <app-create-profile-modal

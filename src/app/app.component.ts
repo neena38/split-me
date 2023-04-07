@@ -37,6 +37,15 @@ export class AppComponent {
     );
   }
 
+  onTaxDiscountChange(tax:string,discount:string) {
+   console.log(tax);
+   console.log(discount);
+   
+   
+    
+    
+  }
+
   onAddProfile() {
     this.profileModal.showModal();
   }
@@ -64,4 +73,10 @@ export class AppComponent {
   get paletteIDs(){
     return this.foodPalette.paletteIDs;
   }
+
+  get totalFoodBill(){
+    return this.foodPalette.getTotalAmount();
+  }
+
+
 }

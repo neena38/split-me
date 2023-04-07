@@ -13,6 +13,14 @@ export class FoodPaletteService {
   };
   palettes: FoodItem[] = [
     new FoodItem(this.genRand(5), 350, [new Participant('dinesh', 350)]),
+    new FoodItem(this.genRand(5), 300, [
+      new Participant('neena', 350),
+      new Participant('sachin', 350),
+    ]),
+    new FoodItem(this.genRand(5), 125, [
+      new Participant('neena', 350),
+      new Participant('leya', 350),
+    ]),
   ];
   paletteIDs: string[] = [];
 
@@ -42,5 +50,22 @@ export class FoodPaletteService {
       total += item.totalContributions;
     });
     return Math.round(total * 100) / 100;
+  }
+
+  getIndividualContributions(): Map<string, number> {
+    let contMap = new Map<string, number>();
+    this.palettes.forEach((dish) => {
+      dish.participants.forEach((participant: Participant) => {
+        if (contMap.has(participant.name)) {
+          contMap.set(
+            participant.name,
+            contMap.get(participant.name)! + participant.contribution
+          );
+        } else {
+          contMap.set(participant.name, participant.contribution);
+        }
+      });
+    });
+    return contMap;
   }
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DetailsService } from 'src/app/services/details.service';
 
 @Component({
   selector: 'app-tax-discount-panel',
@@ -6,8 +7,20 @@ import { Component } from '@angular/core';
   styleUrls: ['./tax-discount-panel.component.scss']
 })
 export class TaxDiscountPanelComponent {
+
+  constructor(private details:DetailsService){
+
+  }
   onTaxDiscountChange(tax: string, discount: string) {
-    console.log(tax);
-    console.log(discount);
+    this.details.tax=parseFloat(tax);
+    this.details.discount=parseFloat(discount);
+  }
+
+  get taxValue(){
+    return this.details.tax;
+  }
+
+  get discountValue(){
+    return this.details.discount;
   }
 }

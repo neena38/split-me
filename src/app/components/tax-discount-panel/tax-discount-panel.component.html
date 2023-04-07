@@ -5,6 +5,7 @@
         >₹<input #taxInp
           class="form-control"
           (change)="onTaxDiscountChange(taxInp.value,discountInp.value)"
+          [value]="taxValue"
       /></span>
     </div>
     <div class="td-panel-item">
@@ -13,6 +14,7 @@
         >₹<input #discountInp
           class="form-control"
           (change)="onTaxDiscountChange(taxInp.value,discountInp.value)"
+          [value]="discountValue"
       /></span>
     </div>
   </div>

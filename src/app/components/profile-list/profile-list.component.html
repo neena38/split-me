@@ -1,0 +1,43 @@
+<div class="people-card shadow-lg p-3 mb-2 rounded card-container">
+    <h3 class="lead" style="text-align: center">Profiles</h3>
+    <div
+      cdkDropList
+      id="profile-wrap-list"
+      [cdkDropListConnectedTo]="paletteIDs"
+      class="profiles-wrapper"
+    >
+      <div *ngFor="let profile of profiles" cdkDrag [cdkDragData]="profile">
+        <app-name-profile
+          [name]="profile"
+          (removeUser)="removeProfile($event)"
+        ></app-name-profile>
+        <div *cdkDragPreview class="profile-drag-preview">
+          <div class="preview-profile-wrapper">
+            <img src="../../../assets/user.png" alt="user.png" />
+            <span>{{ profile }}</span>
+          </div>
+        </div>
+        <div *cdkDragPlaceholder>
+          <app-name-profile
+            [name]="profile"
+            (removeUser)="removeProfile($event)"
+          ></app-name-profile>
+        </div>
+      </div>
+
+      <span style="display: flex; justify-content: center">
+        <button
+          type="button"
+          class="btn btn-info btn-profile"
+          (click)="onAddProfile()"
+        >
+          <span>+</span>
+        </button>
+      </span>
+    </div>
+  </div>
+  <app-create-profile-modal
+    #ProfileModal
+    [existingProfiles]="profiles"
+    (addProfile)="addNewProfile($event)"
+  ></app-create-profile-modal>

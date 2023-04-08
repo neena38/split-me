@@ -15,19 +15,6 @@
 
 .right-panel {
   flex-basis: 30%;
-  .people-card {
-  }
-}
-
-.profiles-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  div {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-  }
 }
 
 // (+) add button
@@ -46,21 +33,6 @@
   }
 }
 
-.btn-profile {
-  width: 35px;
-  height: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 25px;
-  span {
-    font-size: 25px;
-    font-weight: bold;
-    color: white;
-  }
-}
-//
-
 // webkits
 
 ::-webkit-scrollbar {
@@ -75,37 +47,4 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #56565a;
-}
-
-//cdk drag
-
-.cdk-drag-preview {
-  opacity: 0.8;
-}
-.cdk-drag-placeholder {
-  opacity: 0;
-}
-
-.profile-drag-preview {
-  .preview-profile-wrapper {
-    display: flex;
-
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-    margin-right: 24px;
-
-    img {
-      width: 34px;
-      height: 34px;
-    }
-    span {
-      font-size: 0.8rem;
-    }
-  }
-}
-
-.cdk-drag-animating {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }

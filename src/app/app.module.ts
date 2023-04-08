@@ -17,6 +17,7 @@ import { TaxDiscountPanelComponent } from './components/tax-discount-panel/tax-d
 import { DetailModalComponent } from './components/detail-modal/detail-modal.component';
 import { MatTableModule } from "@angular/material/table";
 import { MatSortModule } from '@angular/material/sort';
+import { ProfileListComponent } from './components/profile-list/profile-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import { MatSortModule } from '@angular/material/sort';
     AdvancedProfileComponent,
     TaxDiscountPanelComponent,
     DetailsPanelComponent,
-    DetailModalComponent
+    DetailModalComponent,
+    ProfileListComponent
   ],
   imports: [
     BrowserModule,

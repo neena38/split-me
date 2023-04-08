@@ -1,9 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { FoodItem } from './classes/food-item';
-import { CreateProfileModalComponent } from './components/create-profile-modal/create-profile-modal.component';
 import { FoodPaletteService } from './services/food-palette.service';
-import { SimpleProfileService } from './services/simple-profile.service';
 
 @Component({
   selector: 'app-root',
@@ -12,16 +9,10 @@ import { SimpleProfileService } from './services/simple-profile.service';
 })
 export class AppComponent {
   @ViewChild('itemWrapper') myScrollContainer!: ElementRef;
-  @ViewChild('ProfileModal') profileModal: CreateProfileModalComponent;
+
   title = 'split-me';
 
-  constructor(
-    fb: FormBuilder,
-    private foodPalette: FoodPaletteService,
-    private simpleProfile: SimpleProfileService
-  ) {
-    this.profileModal = new CreateProfileModalComponent(fb);
-  }
+  constructor(private foodPalette: FoodPaletteService) {}
 
   onAddFoodPalette() {
     this.foodPalette.add();
@@ -35,32 +26,11 @@ export class AppComponent {
     );
   }
 
-  onAddProfile() {
-    this.profileModal.showModal();
-  }
-
   removeFoodTile(item: FoodItem) {
     this.foodPalette.remove(item);
-  }
-
-  removeProfile(profile: string) {
-    this.simpleProfile.remove(profile);
-  }
-
-  addNewProfile(profile: string) {
-    this.simpleProfile.add(profile);
   }
 
   get palettes() {
     return this.foodPalette.palettes;
   }
-
-  get profiles() {
-    return this.simpleProfile.profiles;
-  }
-
-  get paletteIDs() {
-    return this.foodPalette.paletteIDs;
-  }
-
 }

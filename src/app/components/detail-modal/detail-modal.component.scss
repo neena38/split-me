@@ -21,3 +21,20 @@
 .food-header {
   color: black;
 }
+ .modal-body{
+    padding-top:0px;
+ }
+.body-wrapper {
+  display: flex;
+}
+.data-panel {
+    margin-left: 20px;
+    flex-grow: 1;
+    .panel-content{
+        padding:24px;
+        .total-amount{
+            font-size:1rem;
+            margin-top: 10px;
+        }
+    }
+}

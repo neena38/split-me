@@ -28,11 +28,19 @@ export class DetailModalComponent implements AfterViewInit {
 
 
   displayedColumns: string[] = ['name', 'food_amount', 'split_amount'];
+  footerColumns: string[] = ['total_amt', 'total_food_amt', 'total_split_amt'];
 
   showModal() {
     console.log('showing detail modal');
     this.dataSource = new MatTableDataSource(this.details.generateDataSourceMap());
     this.dataSource.sort = this.sort;
     this.myModal.show();
+  }
+  get totalFoodBill() {
+    return this.details.totalFoodAmount;
+  }
+
+  get finalTotal(){
+    return this.details.finalTotal;
   }
 }

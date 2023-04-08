@@ -1,0 +1,23 @@
+.mat-mdc-table .mdc-data-table__row {
+  height: 40px;
+}
+.table-wrap {
+  width: 400px;
+  overflow: auto;
+}
+
+.mat-column-split_amount {
+  color: rgb(0, 58, 8);
+  padding-right: 0px;
+}
+.mat-column-name {
+  text-transform: capitalize;
+}
+.mat-column-food_amount {
+  color: rgb(117, 117, 117);
+}
+
+.split-header,
+.food-header {
+  color: black;
+}

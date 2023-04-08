@@ -7,31 +7,33 @@
         <button type="button" class="btn-close" aria-label="Close" (click)="myModal.hide()"></button>
       </div>
       <div class="modal-body">
+        <div class="table-wrap shadow-lg">
         <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
         
   
           <!-- Name Column -->
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            <td mat-cell *matCellDef="let element">👤 {{element.name}} </td>
           </ng-container>
         
           <!-- food amount Column -->
           <ng-container matColumnDef="food_amount">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Food total </th>
-            <td mat-cell *matCellDef="let element"> {{element.food_amount}} </td>
+            <th class="food-header" mat-header-cell *matHeaderCellDef mat-sort-header> Food total </th>
+            <td mat-cell *matCellDef="let element">₹ {{element.food_amount}} </td>
           </ng-container>
         
           <!-- split amount Column -->
           <ng-container matColumnDef="split_amount">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Split Amount </th>
-            <td mat-cell *matCellDef="let element"> {{element.split_amount}} </td>
+            <th class="split-header" mat-header-cell *matHeaderCellDef mat-sort-header> Split Amount </th>
+            <td mat-cell *matCellDef="let element">₹ {{element.split_amount}} </td>
           </ng-container>
         
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           
         </table>
+      </div>
         
       </div>
       <div class="modal-footer">

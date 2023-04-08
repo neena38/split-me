@@ -17,7 +17,7 @@ export class AppComponent {
   onAddFoodPalette() {
     this.foodPalette.add();
 
-    // create a smoother transition for this or discard scroll effect
+    //TODO create a smoother transition for this or discard scroll effect
     setTimeout(
       () =>
         (this.myScrollContainer.nativeElement.scrollTop =

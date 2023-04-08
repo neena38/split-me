@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import * as saveAs from 'file-saver';
 
 @Injectable({
   providedIn: 'root',
@@ -25,5 +26,34 @@ export class SimpleProfileService {
 
   add(profile: string) {
     this.profiles.push(profile);
+  }
+
+  exportProfiles() {
+    console.log('exporting profiles');
+    return saveAs(
+      new Blob([JSON.stringify(this.profiles, null, 2)], { type: 'JSON' }),
+      'my_profiles.prf'
+    );
+  }
+  checkValid(profilePack:string[]){
+    return !((new Set(profilePack)).size !== profilePack.length);
+  }
+
+  importProfiles(file: any) {
+    let fileReader = new FileReader();
+   
+    fileReader.readAsText(file);
+    fileReader.onload = (e) => {
+      if(fileReader.result)
+      var impData=JSON.parse(fileReader.result as string);
+      if(this.checkValid(impData)){
+        this.profiles=impData;
+      }
+      else{
+        console.log('invalid');
+        
+      }
+      
+    }
   }
 }

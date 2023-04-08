@@ -22,7 +22,6 @@ export class ProfileListComponent {
   @HostListener('window:keydown.shift.p', ['$event'])
   keydown(event: KeyboardEvent): void {
     this.onAddProfile();
-    
   }
   removeProfile(profile: string) {
     this.simpleProfile.remove(profile);
@@ -34,6 +33,13 @@ export class ProfileListComponent {
 
   onAddProfile() {
     this.profileModal.showModal();
+  }
+
+  export() {
+    this.simpleProfile.exportProfiles();
+  }
+  onFileInput(e: any) {
+    this.simpleProfile.importProfiles(e.target.files[0]);
   }
 
   get paletteIDs() {

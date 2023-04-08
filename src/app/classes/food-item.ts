@@ -39,4 +39,15 @@ export class FoodItem {
       participant.contribution = this.price;
     });
   }
+
+  public addParticipant(participant: Participant) {
+    let isExist = false;
+    this.participants.forEach((p) => {
+      if (p.name === participant.name) {
+        isExist = true;
+        //participant already exists
+      }
+    });
+    if (!isExist) this.participants.push(participant);
+  }
 }

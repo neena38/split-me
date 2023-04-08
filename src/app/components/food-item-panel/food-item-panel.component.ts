@@ -34,15 +34,11 @@ export class FoodItemPanelComponent {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    console.log('got a drop');
-
-    console.log(event.item.data);
     let participant = new Participant(event.item.data, this.foodData.price);
-    this.foodData.participants.push(participant);
+    this.foodData.addParticipant(participant);
   }
 
   get participants() {
     return this.foodData.participants;
   }
 }
-

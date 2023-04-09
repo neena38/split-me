@@ -18,7 +18,9 @@ export class SimpleProfileService {
     'sidharth',
     'jithin',
   ];
-  constructor() {}
+  constructor() {
+    
+  }
 
   remove(profile: string) {
     this.profiles = this.profiles.filter((x) => x !== profile);
@@ -26,6 +28,7 @@ export class SimpleProfileService {
 
   add(profile: string) {
     this.profiles.push(profile);
+    this.profiles.sort();
   }
 
   exportProfiles() {
@@ -48,6 +51,7 @@ export class SimpleProfileService {
       var impData=JSON.parse(fileReader.result as string);
       if(this.checkValid(impData)){
         this.profiles=impData;
+        this.profiles.sort();
       }
       else{
         console.log('invalid');

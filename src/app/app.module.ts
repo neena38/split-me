@@ -18,6 +18,7 @@ import { DetailModalComponent } from './components/detail-modal/detail-modal.com
 import { MatTableModule } from "@angular/material/table";
 import { MatSortModule } from '@angular/material/sort';
 import { ProfileListComponent } from './components/profile-list/profile-list.component';
+import { FoodPalettesBoxComponent } from './components/food-palettes-box/food-palettes-box.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,8 @@ import { ProfileListComponent } from './components/profile-list/profile-list.com
     TaxDiscountPanelComponent,
     DetailsPanelComponent,
     DetailModalComponent,
-    ProfileListComponent
+    ProfileListComponent,
+    FoodPalettesBoxComponent
   ],
   imports: [
     BrowserModule,

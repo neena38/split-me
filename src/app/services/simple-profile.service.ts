@@ -18,11 +18,15 @@ export class SimpleProfileService {
   }
 
   exportProfiles() {
-    console.log('exporting profiles');
-    return saveAs(
-      new Blob([JSON.stringify(this.profiles, null, 2)], { type: 'JSON' }),
-      'my_profiles.prf'
-    );
+    if (this.profiles.length > 0) {
+      console.log('exporting profiles');
+      return saveAs(
+        new Blob([JSON.stringify(this.profiles, null, 2)], { type: 'JSON' }),
+        'my_profiles.prf'
+      );
+    } else {
+      alert('No profile set to export');
+    }
   }
   checkValid(profilePack: string[]) {
     return !(new Set(profilePack).size !== profilePack.length);
@@ -33,13 +37,16 @@ export class SimpleProfileService {
 
     fileReader.readAsText(file);
     fileReader.onload = (e) => {
-      if (fileReader.result)
-        var impData = JSON.parse(fileReader.result as string);
-      if (this.checkValid(impData)) {
-        this.profiles = impData;
-        this.profiles.sort();
-      } else {
-        console.log('invalid');
+      try {
+        if (fileReader.result)
+          var impData = JSON.parse(fileReader.result as string);
+        if (this.checkValid(impData)) {
+          this.profiles = impData;
+          this.profiles.sort();
+        }
+      } catch (error) {
+        console.log(error);
+        alert('Invalid profile file')
       }
     };
   }

@@ -1,0 +1,19 @@
+<h3 class="lead" style="text-align: center">Food Palette</h3>
+<div #itemWrapper class="food-items-wrapper">
+  <div class="food-items">
+    <app-food-item-panel
+      *ngFor="let palette of palettes"
+      [foodData]="palette"
+      (removePanel)="removeFoodTile($event)"
+    ></app-food-item-panel>
+    <span style="display: flex; justify-content: center">
+      <button
+        type="button"
+        class="btn btn-info btn-lg"
+        (click)="onAddFoodPalette()"
+      >
+        <span>+</span>
+      </button>
+    </span>
+  </div>
+</div>

@@ -1,28 +1,10 @@
 <div id="main-wrapper">
   <div class="bill-card mt-3 mx-3 shadow-lg p-3 mb-3 rounded card-container">
-    <h3 class="lead" style="text-align: center">Food Palette</h3>
-    <div #itemWrapper class="food-items-wrapper">
-      <div class="food-items">
-        <app-food-item-panel
-          *ngFor="let palette of palettes"
-          [foodData]="palette"
-          (removePanel)="removeFoodTile($event)"
-        ></app-food-item-panel>
-        <span style="display: flex; justify-content: center">
-          <button
-            type="button"
-            class="btn btn-info btn-lg"
-            (click)="onAddFoodPalette()"
-          >
-            <span>+</span>
-          </button>
-        </span>
-      </div>
-    </div>
+    <app-food-palettes-box></app-food-palettes-box>
   </div>
   <div class="right-panel mt-3 mx-2">
-    <app-profile-list></app-profile-list>
     <app-details-panel></app-details-panel>
+    <app-profile-list></app-profile-list>
+   
   </div>
-  
 </div>

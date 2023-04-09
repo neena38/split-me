@@ -12,6 +12,10 @@ export class TaxDiscountPanelComponent {
 
   }
   onTaxDiscountChange(tax: string, discount: string) {
+    const expRegx= /(?:(?:^|[-+])(?:\s*-?\d+(\.\d+)?\s*))+$/;
+    if(expRegx.test(tax)){
+      tax=this.details.addbits(tax).toString();
+    }
     this.details.tax=parseFloat(tax);
     this.details.discount=parseFloat(discount);
   }

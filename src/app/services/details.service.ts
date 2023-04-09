@@ -49,4 +49,15 @@ export class DetailsService {
 
     return ContributorsMap;
   }
+
+  //utility function
+  addbits(s: string): number {
+    const regex = /[+\-]?([0-9\.]+)/g;
+    const matches = s.replace(/\s/g, '').match(regex) || [];
+    let sum = 0;
+    for (const val of matches) {
+      sum += parseFloat(val);
+    }
+    return sum;
+  }
 }

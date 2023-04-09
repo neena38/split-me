@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { FoodItem } from './classes/food-item';
 import { FoodPaletteService } from './services/food-palette.service';
 
@@ -13,6 +13,11 @@ export class AppComponent {
   title = 'split-me';
 
   constructor(private foodPalette: FoodPaletteService) {}
+
+  @HostListener('window:keydown.shift.f', ['$event'])
+  keydown(event: KeyboardEvent): void {
+    this.onAddFoodPalette();
+  }
 
   onAddFoodPalette() {
     this.foodPalette.add();

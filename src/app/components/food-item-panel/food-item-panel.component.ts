@@ -1,5 +1,5 @@
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FoodItem } from 'src/app/classes/food-item';
 import { Participant } from 'src/app/classes/participant';
 
@@ -8,18 +8,24 @@ import { Participant } from 'src/app/classes/participant';
   templateUrl: './food-item-panel.component.html',
   styleUrls: ['./food-item-panel.component.scss'],
 })
-export class FoodItemPanelComponent {
+export class FoodItemPanelComponent implements AfterViewInit {
   @Input() foodData: FoodItem;
   @Output() removePanel = new EventEmitter<FoodItem>();
+  @ViewChild('dishName') dishName: any;
   totalRate: number = 0;
 
   constructor() {
     this.foodData = new FoodItem('undefined', 0, []);
   }
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.dishName.nativeElement.select();
+    }, 50);
+   
+   
+  }
 
   changes(type: string) {
-    console.log('changed');
-    console.log(this.foodData);
     if (type === 'price') {
       this.foodData.updatePrices();
     }

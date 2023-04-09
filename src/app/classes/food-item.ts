@@ -25,6 +25,9 @@ export class FoodItem {
   get ID() {
     return 'consumer-list-' + this.id;
   }
+  get foodID(){
+    return this.id;
+  }
 
   public get totalContributions(): number {
     let total: number = 0;

@@ -17,9 +17,9 @@ export class SimpleProfileService {
     'thomas',
     'sidharth',
     'jithin',
-  ];
+  ].sort();
   constructor() {
-    
+
   }
 
   remove(profile: string) {

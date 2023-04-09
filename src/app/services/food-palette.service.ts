@@ -39,8 +39,9 @@ export class FoodPaletteService {
   }
 
   add() {
-    let item: FoodItem = new FoodItem(this.genRand(5), 0, []);
+    let item: FoodItem = new FoodItem('', 0, []);
     console.log(item.ID);
+    item.name='item '+item.foodID;
     this.palettes.push(item);
     this.updatePanelIds();
   }

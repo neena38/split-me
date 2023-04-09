@@ -6,8 +6,8 @@ import { IContributors } from '../classes/interfaces';
   providedIn: 'root',
 })
 export class DetailsService {
-  tax: number = 113.15;
-  discount: number = 75;
+  tax: number = 0;
+  discount: number = 0;
   totalFoodAmount: number = 0;
   finalTotal: number = 0;
   contributorsMap: Map<string, number> | undefined;
@@ -15,8 +15,6 @@ export class DetailsService {
   constructor(private foodPalette: FoodPaletteService) {}
 
   calculateFinalTotal() {
-    console.log('tax ' + this.tax);
-    console.log('discount ' + this.discount);
     this.totalFoodAmount = this.foodPalette.getTotalAmount();
     this.contributorsMap = this.foodPalette.getIndividualContributions();
     //console.log(ContributorsMap); // without discount-tax

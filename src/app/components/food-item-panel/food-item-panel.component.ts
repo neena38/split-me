@@ -1,5 +1,12 @@
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
-import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FoodItem } from 'src/app/classes/food-item';
 import { Participant } from 'src/app/classes/participant';
 
@@ -21,8 +28,6 @@ export class FoodItemPanelComponent implements AfterViewInit {
     setTimeout(() => {
       this.dishName.nativeElement.select();
     }, 50);
-   
-   
   }
 
   changes(type: string) {

@@ -59,18 +59,19 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  .placeholder-text{
+    font-size: 0.9rem;
+    opacity: 0.6;
+    width: 100%;
+    text-align: center;
+  }
 }
 
 //cdk drag and drop
 
+
 .cdk-drop-list-dragging {
   background: rgba(100, 255, 229, 0.104);
-}
-.cdk-drag-preview {
-  background: white;
-  width: 100%;
-  height: 100%;
-  opacity: 0.5;
 }
 
 .total-wrapper {

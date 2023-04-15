@@ -6,6 +6,12 @@
       [foodData]="palette"
       (removePanel)="removeFoodTile($event)"
     ></app-food-item-panel>
+    <div *ngIf="!palettes.length" class="instruction-wrapper">
+      <img src="../../../assets/dish.png" alt="dish.png" />
+      <span class="lead help-placeholder"
+        >To add your first dish, simply click on the add button</span
+      >
+    </div>
     <span style="display: flex; justify-content: center">
       <button
         type="button"

@@ -19,7 +19,6 @@ export class SimpleProfileService {
 
   exportProfiles() {
     if (this.profiles.length > 0) {
-      console.log('exporting profiles');
       return saveAs(
         new Blob([JSON.stringify(this.profiles, null, 2)], { type: 'JSON' }),
         'my_profiles.prf'
@@ -46,7 +45,7 @@ export class SimpleProfileService {
         }
       } catch (error) {
         console.log(error);
-        alert('Invalid profile file')
+        alert('Invalid profile file');
       }
     };
   }

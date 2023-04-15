@@ -14,7 +14,6 @@ import {
   Validators,
 } from '@angular/forms';
 
-
 import { Modal } from 'bootstrap';
 import { isDuplicateValidator } from 'src/app/classes/validators';
 @Component({
@@ -52,18 +51,14 @@ export class CreateProfileModalComponent implements AfterViewInit {
       backdrop: 'static',
       keyboard: false,
     });
-    console.log('initalized modal');
   }
 
   showModal() {
-    console.log("showing profile modal");
-    
     this.angForm.reset();
     this.myModal.show();
     setTimeout(() => {
       this.ModalInput.nativeElement.focus();
     }, 500);
-   
   }
 
   onSubmit() {

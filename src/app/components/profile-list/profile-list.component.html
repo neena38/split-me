@@ -11,6 +11,7 @@
       [cdkDropListConnectedTo]="paletteIDs"
       class="profiles-wrapper"
     >
+    <span *ngIf="!profiles.length" class="lead help-placeholder">Manage your profiles by adding or importing them here</span>
       <div *ngFor="let profile of profiles" cdkDrag [cdkDragData]="profile">
         <app-name-profile
           [name]="profile"

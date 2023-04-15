@@ -21,6 +21,14 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  .help-placeholder {
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    opacity: 0.6;
+    width: 100%;
+    text-align: center;
+  }
+
   div {
     display: flex;
     flex-wrap: wrap;

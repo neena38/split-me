@@ -17,7 +17,6 @@ export class DetailsService {
   calculateFinalTotal() {
     this.totalFoodAmount = this.foodPalette.getTotalAmount();
     this.contributorsMap = this.foodPalette.getIndividualContributions();
-    //console.log(ContributorsMap); // without discount-tax
     this.totalAmountMap = new Map<string, number>();
     let finalAmt: number = 0;
     for (let [name, money] of this.contributorsMap) {

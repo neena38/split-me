@@ -28,7 +28,6 @@ export class AdvancedProfileComponent {
     this.contextMenuPosition.y = event.clientY + 'px';
     if (this.contextMenu != null) {
       this.contextMenu.menuData = { item: 'item' };
-      //this.contextMenu.menu.focusFirstItem('mouse');
       this.contextMenu.openMenu();
     }
   }
@@ -48,11 +47,6 @@ export class AdvancedProfileComponent {
   }
 
   remove() {
-    console.log('removing participant');
     this.removeParticipant.emit(this.participant);
-  }
-
-  onContextMenuAction(item: any) {
-    console.log(item);
   }
 }

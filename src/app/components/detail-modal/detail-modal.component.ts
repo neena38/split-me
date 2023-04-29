@@ -2,8 +2,9 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Modal } from 'bootstrap';
-import { IContributors } from 'src/app/classes/interfaces';
 import { DetailsService } from 'src/app/services/details.service';
+import { SummaryModalComponent } from '../summary-modal/summary-modal.component';
+import { SummaryExportService } from 'src/app/services/summary-export.service';
 
 @Component({
   selector: 'app-detail-modal',
@@ -11,12 +12,18 @@ import { DetailsService } from 'src/app/services/details.service';
   styleUrls: ['./detail-modal.component.scss'],
 })
 export class DetailModalComponent implements AfterViewInit {
+  @ViewChild('SummaryModal') summaryModal: SummaryModalComponent;
   @ViewChild('DetailModal') Modal: any;
   @ViewChild(MatSort) sort = new MatSort();
   myModal: any;
   dataSource: any;
 
-  constructor(private details: DetailsService) {}
+  constructor(
+    private details: DetailsService,
+    summaryExport: SummaryExportService
+  ) {
+    this.summaryModal = new SummaryModalComponent(details, summaryExport);
+  }
 
   ngAfterViewInit() {
     this.myModal = new Modal(this.Modal.nativeElement, {
@@ -41,5 +48,19 @@ export class DetailModalComponent implements AfterViewInit {
 
   get finalTotal() {
     return this.details.finalTotal;
+  }
+
+  get participants() {
+    return this.details.participantsCount;
+  }
+
+  get totalDishes() {
+    return this.details.dishesCount;
+  }
+
+  viewSummary() {
+    console.log('viewing summary');
+    this.details.generateIndividualSummary();
+    this.summaryModal.showModal();
   }
 }

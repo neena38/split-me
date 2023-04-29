@@ -1,0 +1,60 @@
+<div #SummaryModal id="summaryModal" class="modal fade" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header border-0 pb-0">
+        <div class="header-content">
+          <div class="header-wrap">
+            <p class="lead modal-title" style="text-align: center" id="title">
+              SUMMARY
+            </p>
+          </div>
+          <div class="menu-wrap">
+            <span class="download-wrapper"
+              ><img
+                class="option-button"
+                id="download"
+                src="../../../assets/downlaod.jpg"
+                alt="download"
+                (click)="onDownload()"
+              />
+              <div
+                class="sub-menu rounded shadow-lg"
+                [style.display]="isDownloadOptions ? 'block' : 'none'"
+              >
+                <div class="menu-item" (click)="downloadAs('img')">
+                  <span><img src="../../../assets/img-icon.svg" alt="" /></span>
+                  <div>Download Image</div>
+                </div>
+                <div class="menu-item" (click)="downloadAs('pdf')">
+                  <span><img src="../../../assets/pdf-icon.svg" alt="" /></span>
+                  <div>Download PDF</div>
+                </div>
+              </div>
+            </span>
+
+            <span
+              ><img
+                class="option-button"
+                src="../../../assets/cancel-icon.svg"
+                alt="close"
+                (click)="myModal.hide()"
+            /></span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div #SummaryBody class="summary-container" (click)="onBodyClicked()">
+          <div id="img-container">
+            <img src="../../../assets/split-me-logo.png" alt="logo" />
+          </div>
+
+          <div class="tables-container">
+            <div class="table-item" *ngFor="let user of summary">
+              <app-summary-table [summaryData]="user"></app-summary-table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

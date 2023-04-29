@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FoodItem } from '../classes/food-item';
 import { Participant } from '../classes/participant';
+import { IorderDetails } from '../classes/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -42,20 +43,51 @@ export class FoodPaletteService {
     return Math.round(total * 100) / 100;
   }
 
+  /**
+   *
+   * @returns the sum of contribution from every dish of an individual
+   */
   getIndividualContributions(): Map<string, number> {
-    let contMap = new Map<string, number>();
-    this.palettes.forEach((dish) => {
-      dish.participants.forEach((participant: Participant) => {
-        if (contMap.has(participant.name)) {
-          contMap.set(
-            participant.name,
-            contMap.get(participant.name)! + participant.contribution
-          );
-        } else {
-          contMap.set(participant.name, participant.contribution);
-        }
-      });
-    });
+    const contMap = new Map<string, number>();
+
+    for (let i = 0; i < this.palettes.length; i++) {
+      const participants = this.palettes[i].participants;
+
+      for (let j = 0; j < participants.length; j++) {
+        const participant = participants[j];
+        const name = participant.name;
+        const contribution = participant.contribution;
+
+        contMap.set(name, (contMap.get(name) || 0) + contribution);
+      }
+    }
     return contMap;
+  }
+
+  /**
+   * @returns list of orders from every food pallete the individual is a participant of
+   */
+  getIndividualOrders(): Map<string, IorderDetails[]> {
+    const indDetailsMap = new Map<string, IorderDetails[]>();
+
+    for (let i = 0; i < this.palettes.length; i++) {
+      const dish = this.palettes[i];
+      const participants = dish.participants;
+
+      for (let j = 0; j < participants.length; j++) {
+        const participant = participants[j];
+        const name = participant.name;
+
+        const detail: IorderDetails = {
+          food_name: dish.name,
+          contribution: participant.contribution,
+          quantity: participant.contribution / dish.price,
+        };
+        const orders = indDetailsMap.get(name) || [];
+        orders.push(detail);
+        indDetailsMap.set(name, orders);
+      }
+    }
+    return indDetailsMap;
   }
 }

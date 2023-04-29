@@ -12,8 +12,6 @@ export class SummaryExportService {
     height: number,
     type: string
   ) {
-    const orientation = width >= height ? 'l' : 'p';
-
     const FILEURI = canvas.toDataURL('image/png');
     var link = document.createElement('a');
     link.download = 'food-summary.png';
@@ -21,26 +19,15 @@ export class SummaryExportService {
     if (type == 'img') {
       link.click();
     } else {
-      let PDF = new jsPDF(orientation, 'px', 'a4');
-      const imgProps = PDF.getImageProperties(canvas);
-      let fileHeight = PDF.internal.pageSize.getHeight();
-      let fileWidth = (imgProps.width * fileHeight) / imgProps.height;
-
-      const pageWidth = PDF.internal.pageSize.getWidth();
-      const pageHeight = PDF.internal.pageSize.getHeight();
-
-      const widthRatio = pageWidth / canvas.width;
-      const heightRatio = pageHeight / canvas.height;
-      const ratio = widthRatio > heightRatio ? heightRatio : widthRatio;
-
-      const canvasWidth = canvas.width * ratio;
-      const canvasHeight = canvas.height * ratio;
-
-      const marginX = (pageWidth - canvasWidth) / 2;
-      const marginY = (pageHeight - canvasHeight) / 2;
-
-      PDF.addImage(FILEURI, 'PNG', marginX, marginY, fileWidth, fileHeight);
-      PDF.save('food-summary.pdf');
+      const orientation = width >= height ? 'l' : 'p';
+      const pdf = new jsPDF({
+        orientation,
+        unit: 'mm',
+      });
+      pdf.internal.pageSize.width = width * 0.5;
+      pdf.internal.pageSize.height = height * 0.5;
+      pdf.addImage(FILEURI, 'PNG', 0, 0, width * 0.5, height * 0.5);
+      pdf.save('food-summary.pdf');
     }
 
     console.log('downlaod complete');

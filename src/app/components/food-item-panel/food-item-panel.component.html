@@ -17,7 +17,7 @@
         >₹
         <input
           type="number"
-          onClick="this.select();"
+          appInputClickSelect
           [(ngModel)]="foodData.price"
           (change)="changes('price')"
       /></span>
@@ -41,10 +41,23 @@
       </div>
     </div>
   </div>
-  <div class="total-wrapper">
-    Total :
-    <span class="total-rate shadow-lg"
-      >₹ {{ foodData.totalContributions }}</span
-    >
+  <div class="bottom-menu">
+    <div *ngIf="participants.length" class="options-panel">
+      <div (click)="onMenuOption('reset')">
+        <img src="../../../assets/reset.svg" alt="reset" />
+      </div>
+      <div (click)="onMenuOption('split')">
+        <img src="../../../assets/split-icon.png" alt="split" />
+      </div>
+      <div (click)="onMenuOption('clear')">
+        <img src="../../../assets/cancel-icon.svg" alt="clear" />
+      </div>
+    </div>
+    <div class="total-wrapper">
+      Total :
+      <span class="total-rate shadow-lg"
+        >₹ {{ foodData.totalContributions }}</span
+      >
+    </div>
   </div>
 </div>

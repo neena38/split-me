@@ -1,4 +1,4 @@
-Live app : [Split Me](split-me-f4d3c.web.app)
+Live app : [Split Me](https://split-me-f4d3c.web.app)
 
 # Split-Me Release notes 1.2 🚀
 

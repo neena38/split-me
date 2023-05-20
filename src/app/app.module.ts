@@ -28,6 +28,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { QRCodeModule } from 'angularx-qrcode';
 import { SummaryQrModalComponent } from './components/summary-qr-modal/summary-qr-modal.component';
 import { InputClickSelectDirective } from './directives/input-click-select.directive';
+import { CtrlClickDirective } from './directives/ctrl-click.directive';
+import { ProfileDragPreviewComponent } from './components/profile-drag-preview/profile-drag-preview.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +48,8 @@ import { InputClickSelectDirective } from './directives/input-click-select.direc
     DarkColorDirective,
     SummaryQrModalComponent,
     InputClickSelectDirective,
+    CtrlClickDirective,
+    ProfileDragPreviewComponent,
   ],
   imports: [
     BrowserModule,

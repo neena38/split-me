@@ -1,4 +1,20 @@
-Live app : [Split Me](https://split-me-f4d3c.web.app)
+<h1 align="center">
+  <br>
+  <a href="https://split-me-f4d3c.web.app/"><img src="repo_assets/split-me-logo.png" alt="split-me" width="200"></a>
+  <br>
+  Split Me
+  <br>
+</h1>
+
+<p align="center">
+
+<img src="https://img.shields.io/badge/version-1.3.0-blue">
+<img src="https://img.shields.io/badge/Angular-15.1.3-red">
+<img src="https://img.shields.io/github/issues/jobeljohny/split-me.svg">
+  <a href="https://split-me-f4d3c.web.app/"><img src="https://img.shields.io/badge/website-up-green"></a>  
+</p>
+
+#### Live app : [Split Me](https://split-me-f4d3c.web.app)
 
 # Split-Me Release notes 1.3 🚀
 
@@ -14,7 +30,11 @@ Live app : [Split Me](https://split-me-f4d3c.web.app)
 
 - minor UI bug fixes
 
-#### previous release notes : [a relative link](src\app\release notes\release-notes.md)
+#### previous release notes : [release notes](release%20notes\release-notes.md)
+
+### contributors
+
+![Your Repository's Stats](https://contrib.rocks/image?repo=jobeljohny/split-me)
 
 # SplitMe
 

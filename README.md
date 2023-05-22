@@ -30,7 +30,7 @@
 
 - minor UI bug fixes
 
-#### previous release notes : [release notes](release%20notes\release-notes.md)
+#### previous release notes : [release notes](release%20notes/release-notes.md)
 
 ### contributors
 

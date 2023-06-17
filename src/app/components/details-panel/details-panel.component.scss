@@ -1,23 +1,27 @@
+@import "../../styles/palette.scss";
+
 .details-panel {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: $card-color;
   .amounts-container {
     .amount-item {
       font-size: 1rem;
-      font-weight: 400;
       display: flex;
 
       div {
         background-color: rgb(244, 246, 255);
         border: 1px solid white;
         padding: 8px 12px;
-        font-weight: 400;
+      
         &.label {
           width: 140px;
+          font-size: 1rem;
         }
         &.value {
           width: 125px;
+          font-weight: 400;
         }
       }
     }
@@ -28,12 +32,12 @@
     font-size: 1rem;
     background-color: rgb(241, 200, 200);
     padding: 10px 16px;
-    border: 1px solid rgb(94, 184, 94);
-    background: rgb(251, 255, 251);
+    border: 1px solid $primary-color;
+    background: rgb(251, 251, 255);
     cursor: pointer;
     border-radius: 20px;
     &:hover {
-      background: rgb(94, 184, 94);
+      background: $primary-color;
       color: white;
     }
   }

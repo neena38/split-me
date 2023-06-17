@@ -1,0 +1,58 @@
+@import "../../../styles/palette.scss";
+$text-color: #8f9bb0;
+.help-wrapper {
+  display: flex;
+  height: 100%;
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 260px;
+    height: 100%;
+    background-color: $primary-color;
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin-top: 32px;
+    }
+
+    li {
+      cursor: pointer;
+      width: 100%;
+      .menu-item {
+        display: block;
+        padding: 16px 16px;
+        color: $text-color;
+        text-decoration: none;
+        transition-duration: 0.25s;
+        .item-logo {
+          margin-right: 12px;
+          img {
+            width: 20px;
+            height: 20px;
+            filter: invert(85%) sepia(3%) saturate(2773%) hue-rotate(188deg)
+              brightness(74%) contrast(80%);
+          }
+        }
+      }
+
+      &:hover {
+        background-color: #3b4f6a;
+        .menu-item {
+          color: white;
+        }
+        img {
+          transform: scale(1.2);
+        }
+      }
+    }
+    .active {
+      background-color: #2b3c58;
+    }
+  }
+  .content {
+    padding: 16px;
+    width: 100%;
+    background: rgb(255, 254, 249);
+  }
+}

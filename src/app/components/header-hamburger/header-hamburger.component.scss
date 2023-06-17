@@ -1,0 +1,145 @@
+@import "../../styles/palette.scss";
+$background-color-primary: $primary-color;
+$background-color-secondary: #505050;
+$background-color-menu-btn: #ffffff;
+$background-color-list: #2b3c58;
+$background-color-menu-box-shadow: rgba(0, 0, 0, 0.2);
+$text-color: #8f9bb0;
+#toggle-menu {
+  opacity: 0;
+
+  &:checked {
+    + .menu-btn {
+      > span {
+        transform: rotate(45deg);
+      }
+
+      > span::before {
+        top: 0;
+        transform: rotate(0deg);
+      }
+
+      > span::after {
+        top: 0;
+        transform: rotate(90deg);
+      }
+    }
+
+    ~ .menu-box {
+      left: 0 !important;
+    }
+  }
+}
+
+.menu-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  z-index: 1;
+
+  > span,
+  > span::before,
+  > span::after {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: $background-color-menu-btn;
+    transition-duration: 0.25s;
+  }
+
+  > span::before {
+    content: "";
+    top: -8px;
+  }
+
+  > span::after {
+    content: "";
+    top: 8px;
+  }
+}
+
+.menu-box {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 200px;
+  height: calc(100vh - 45px - 25px);
+  margin-top: 53px;
+  padding: 25px 0;
+  list-style: none;
+  background-color: $background-color-primary;
+  box-shadow: 1px 10px 30px $background-color-menu-box-shadow;
+  transition-duration: 0.25s;
+  .logo-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    img {
+      width: 130px;
+      height: 130px;
+    }
+    p {
+      margin-top: 10px;
+      color: $text-color;
+      font-size: 1rem;
+    }
+  }
+  .menu-item {
+    display: block;
+    padding: 12px 24px;
+    color: $text-color;
+    text-decoration: none;
+    transition-duration: 0.25s;
+
+    .item-logo {
+      margin-right: 12px;
+      img {
+        width: 18px;
+        height: 18px;
+        filter: invert(85%) sepia(3%) saturate(2773%) hue-rotate(188deg)
+          brightness(74%) contrast(80%);
+      }
+    }
+  }
+
+  .visit-panel {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    a {
+      color: $text-color;
+      font-size: 1rem;
+      text-decoration: none;
+      font-family: Brush Script MT, Brush Script Std, cursive;
+      &:hover {
+        color: white;
+        cursor: pointer;
+        transform: scale(1.2);
+      }
+    }
+  }
+}
+
+li {
+  background-color: $background-color-list;
+  cursor: pointer;
+  &:hover {
+    .menu-item {
+      color: white;
+    }
+    background-color: #3b4f6a;
+    img {
+      transform: scale(1.2);
+    }
+  }
+}

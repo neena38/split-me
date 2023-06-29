@@ -8,7 +8,7 @@
 
 <p align="center">
 
-<img src="https://img.shields.io/badge/version-2.0.0-blue">
+<img src="https://img.shields.io/badge/version-2.1.0-blue">
 <img src="https://img.shields.io/badge/Angular-15.1.3-red">
 <img src="https://img.shields.io/github/issues/jobeljohny/split-me.svg">
   <a href="https://split-me-f4d3c.web.app/"><img src="https://img.shields.io/badge/website-up-green"></a>  
@@ -16,11 +16,12 @@
 
 #### Live app : [Split Me](https://split-me-f4d3c.web.app)
 
-# Split-Me Release notes 2.0 🚀
+# Split-Me Release notes 2.1 🚀
 
 ### improvements 🛠️
 
 - New Navigation panel and Help menu
+- Added Mobile support for usability
 - New Hamburger Menu and theme
 - Added options to report issues and links to the Repo
 - UI improvements

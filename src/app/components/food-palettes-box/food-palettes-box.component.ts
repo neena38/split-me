@@ -1,6 +1,7 @@
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FoodItem } from 'src/app/classes/food-item';
 import { FoodPaletteService } from 'src/app/services/food-palette.service';
+import { KeyBindingService } from 'src/app/services/keybinding.service';
 
 @Component({
   selector: 'app-food-palettes-box',
@@ -10,21 +11,18 @@ import { FoodPaletteService } from 'src/app/services/food-palette.service';
 export class FoodPalettesBoxComponent {
   @ViewChild('itemWrapper') myScrollContainer!: ElementRef;
 
-  @HostListener('window:keydown.alt.f', ['$event'])
-  keydown(event: KeyboardEvent): void {
-    event.preventDefault();
-    this.onAddFoodPalette();
+  constructor(private foodPalette: FoodPaletteService, private keyBinding: KeyBindingService) {
+    this.keyBinding.handleAltF(this.onAddFoodPalette.bind(this))
   }
 
-  constructor(private foodPalette: FoodPaletteService) {}
   onAddFoodPalette() {
     this.foodPalette.add();
 
     //TODO create a smoother transition for this or discard scroll effect
     setTimeout(
       () =>
-        (this.myScrollContainer.nativeElement.scrollTop =
-          this.myScrollContainer?.nativeElement.scrollHeight),
+      (this.myScrollContainer.nativeElement.scrollTop =
+        this.myScrollContainer?.nativeElement.scrollHeight),
       50
     );
   }

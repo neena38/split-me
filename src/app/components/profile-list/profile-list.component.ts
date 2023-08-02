@@ -1,10 +1,11 @@
 import { CdkDragStart } from '@angular/cdk/drag-drop';
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Profile } from 'src/app/classes/profile';
 import { FoodPaletteService } from 'src/app/services/food-palette.service';
 import { SimpleProfileService } from 'src/app/services/simple-profile.service';
 import { CreateProfileModalComponent } from '../create-profile-modal/create-profile-modal.component';
+import { KeyBindingService } from 'src/app/services/keybinding.service';
 @Component({
   selector: 'app-profile-list',
   templateUrl: './profile-list.component.html',
@@ -14,11 +15,10 @@ export class ProfileListComponent {
   constructor(
     private foodPalette: FoodPaletteService,
     private simpleProfile: SimpleProfileService,
+    private keyBinding: KeyBindingService,
     public dialog: MatDialog
-  ) {}
-  @HostListener('window:keydown.alt.p', ['$event'])
-  keydown(event: KeyboardEvent): void {
-    this.onAddProfile();
+  ) {
+    this.keyBinding.handleAltP(this.onAddProfile.bind(this));
   }
 
   removeProfile(profile: string) {

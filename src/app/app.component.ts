@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
+import { KeyBindingService } from './services/keybinding.service';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +9,11 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'split-me';
 
-  constructor() {}
+  constructor(private keyBinding: KeyBindingService) { }
+
+  @HostListener('window:keydown', ['$event'])
+  onKeyDown(event: KeyboardEvent): void {
+    this.keyBinding.keydown(event);
+  }
+
 }

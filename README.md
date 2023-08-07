@@ -39,7 +39,7 @@
 
 ### contributors
 
-![Your Repository's Stats](https://contrib.rocks/image?repo=jobeljohny/split-me#1)
+![Your Repository's Stats](https://contrib.rocks/image?repo=jobeljohny/split-me&max=20#1)
 
 # SplitMe
 

@@ -1,7 +1,7 @@
 import { ChartData } from 'chart.js';
 import { Profile } from './profile';
 import { Graphs } from './constants';
-import { pages } from '../components/Help-Page/help-dialog/help-page-utils';
+import { pages } from '../help-dialog/help-dialog/help-page-utils';
 export interface IContributors {
   name: string;
   food_amount: number;
@@ -42,4 +42,10 @@ export interface IgraphType {
 
 export interface IPageData {
   page: pages;
+}
+
+export interface IBillEntry {
+  item: string;
+  amount: number;
+  quantity?: number;
 }

@@ -8,8 +8,13 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable, map, startWith } from 'rxjs';
-import { foodItem, foodLogo, foodNames } from 'src/app/constants/food-names';
+import { Observable, debounceTime, map, startWith } from 'rxjs';
+import {
+  foodItem,
+  foodLogo,
+  foodNames,
+  getLogo,
+} from 'src/app/constants/food-names';
 
 @Component({
   selector: 'app-food-input-field',
@@ -28,13 +33,16 @@ export class FoodInputFieldComponent implements OnInit {
       startWith(''),
       map((value) => this.filterFood(value || ''))
     );
+    this.stateCtrl.valueChanges.pipe(debounceTime(300)).subscribe(() => {
+      this.updated();
+    });
   }
 
   ngOnInit() {
     if (this.initialName.startsWith('item')) {
       setTimeout(() => {
         this.dishName.nativeElement.select();
-      }, 50);
+      }, 400);
     } else {
       this.stateCtrl.setValue(this.initialName);
       this.updated();
@@ -53,29 +61,8 @@ export class FoodInputFieldComponent implements OnInit {
     //logo check
     const Rawvalue = this.stateCtrl.getRawValue();
     if (!Rawvalue) return;
-    let icon = '🍽️';
-    const value = Rawvalue.toLowerCase();
-    let item = foodNames.find(
-      (fooditem) => fooditem.name.toLowerCase() == value
-    );
-    if (item) {
-      icon = item.icon;
-    }
 
-    //keyword search
-    const searchKeywords = value.split(' ');
-
-    for (const keyword of searchKeywords) {
-      const matchingFoodItem = foodLogo.find((foodItem) =>
-        foodItem.name
-          .split('|')
-          .some((namePart) => namePart.toLowerCase() === keyword)
-      );
-
-      if (matchingFoodItem) {
-        icon = matchingFoodItem.icon;
-      }
-    }
+    const icon = getLogo(Rawvalue);
 
     this.updateIcon.emit(icon);
   }

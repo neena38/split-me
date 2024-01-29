@@ -24,10 +24,10 @@ export class DetailsPanelComponent {
       this.dialog.open(DetailModalComponent, {
         width: '1200px',
         height: '600px',
-        panelClass: 'detailsModal',
+        panelClass: 'split-me-modal',
       });
     } else {
-     this.toastr.error("No Participants present")
+      this.toastr.error('No Participants present');
     }
   }
 

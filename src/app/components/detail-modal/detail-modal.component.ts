@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { ChartData } from 'chart.js';
 import { IContributors } from 'src/app/classes/interfaces';
 import { DetailsService } from 'src/app/services/details.service';
+import { GraphContainerComponent } from '../graph-container/graph-container.component';
 import { SummaryModalComponent } from '../summary-modal/summary-modal.component';
 
 @Component({
@@ -25,10 +25,17 @@ export class DetailModalComponent {
     this.details.generateIndividualSummary();
   }
 
+  openGraph() {
+    this.dialog.open(GraphContainerComponent, {
+      width: '100%',
+      panelClass: 'split-me-modal',
+    });
+  }
+
   viewSummary() {
     this.dialog.open(SummaryModalComponent, {
       width: '1140px',
-      panelClass: 'summaryModal',
+      panelClass: 'split-me-modal',
     });
   }
 }

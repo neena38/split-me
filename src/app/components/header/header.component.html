@@ -12,6 +12,27 @@
         <p>Split Me</p>
       </a>
     </div>
-    <app-help-button></app-help-button>
+    <div class="right-options">
+      <div class="room-btn">
+        <img
+          *ngIf="roomStatus == 'idle'"
+          src="assets/icons/group-icon.svg"
+          matTooltip="Create room"
+          (click)="initiateShare()"
+        />
+        <img
+          class="exit-icon"
+          *ngIf="roomStatus == 'connected'"
+          src="assets/icons/exit-group-icon.svg"
+          matTooltip="Exit room"
+          (click)="exitRoom()"
+        />
+        <app-loading-bubbles
+          *ngIf="roomStatus == 'connecting'"
+          [size]="5"
+        ></app-loading-bubbles>
+      </div>
+      <app-help-button></app-help-button>
+    </div>
   </div>
 </nav>

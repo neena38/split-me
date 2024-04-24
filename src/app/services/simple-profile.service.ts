@@ -1,10 +1,10 @@
 import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { saveAs } from 'file-saver-es';
-import { Profile } from '../classes/profile';
-import { selectionStatus } from '../classes/interfaces';
-import { Subject } from 'rxjs';
-import { JsonValidatorService } from './json-validator.service';
 import { ToastrService } from 'ngx-toastr';
+import { Subject } from 'rxjs';
+import { selectionStatus } from '../classes/interfaces';
+import { Profile } from '../classes/profile';
+import { JsonValidatorService } from './json-validator.service';
 
 @Injectable({
   providedIn: 'root',
@@ -37,6 +37,7 @@ export class SimpleProfileService {
     this.profiles.push(newProfile);
     this.profiles.sort((a, b) => a.name.localeCompare(b.name));
     this.setLocalStorage();
+    return newProfile;
   }
 
   exportProfiles() {
@@ -103,8 +104,9 @@ export class SimpleProfileService {
 
     fileReader.onload = () => {
       try {
+        let impData;
         if (fileReader.result)
-          var impData = JSON.parse(fileReader.result as string);
+          impData = JSON.parse(fileReader.result as string);
         if (this.checkValid(impData)) {
           this.profiles = impData;
           this.setLocalStorage();

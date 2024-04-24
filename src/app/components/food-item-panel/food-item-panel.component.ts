@@ -1,8 +1,10 @@
 import { CdkDragDrop, CdkDragStart } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ActionType } from 'src/app/classes/constants';
 import { FoodItem } from 'src/app/classes/food-item';
 import { Participant } from 'src/app/classes/participant';
 import { Profile } from 'src/app/classes/profile';
+import { StoreService } from 'src/app/services/store.service';
 
 @Component({
   selector: 'app-food-item-panel',
@@ -15,16 +17,33 @@ export class FoodItemPanelComponent {
   @Output() removePanel = new EventEmitter<FoodItem>();
 
   totalRate: number = 0;
-  constructor() {}
+  constructor(private store: StoreService) {}
 
-  changes(type: string) {
-    if (type === 'price') {
-      this.foodData.updatePrices();
-    }
+  onPriceUpdated() {
+    this.foodData.updatePrices();
+    this.store.fireAction(ActionType.UPDATE_DISH_PRICE, {
+      id: this.foodData.id,
+      price: this.foodData.price,
+    });
+  }
+
+  onContributionUpdated(participant: Participant) {
+    this.store.fireAction(ActionType.UPDATE_PARTICIPANT_PRICE, {
+      id: this.foodData.id,
+      name: participant.name,
+      contribution: participant.contribution,
+    });
   }
 
   updateName(foodName: string) {
     this.foodData.name = foodName;
+  }
+
+  updateNameSocket(foodName: string) {
+    this.store.fireAction(ActionType.UPDATE_PALETTE_FOODNAME, {
+      id: this.foodData.id,
+      name: foodName,
+    });
   }
 
   updateIcon(icon: string) {
@@ -36,8 +55,12 @@ export class FoodItemPanelComponent {
   }
   removeParticipant(p: Participant) {
     this.foodData.participants = this.foodData.participants.filter(
-      (x) => x !== p
+      (x) => x.name !== p.name
     );
+    this.store.fireAction(ActionType.REMOVE_PARTICIPANT, {
+      name: p.name,
+      id: this.foodData.id,
+    });
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -45,18 +68,31 @@ export class FoodItemPanelComponent {
       let participant = new Participant(profile, this.foodData.price);
       this.foodData.addParticipant(participant);
     });
+    this.store.fireAction(ActionType.ADD_PARTICIPANT, {
+      profiles: event.item.data,
+      id: this.foodData.id,
+    });
   }
 
   onMenuOption(option: string) {
     switch (option) {
       case 'reset':
         this.foodData.resetDefaultPrice();
+        this.store.fireAction(ActionType.RESET_PALETTE_DEFAULT_PRICE, {
+          id: this.foodData.id,
+        });
         break;
       case 'split':
         this.foodData.splitEvenly();
+        this.store.fireAction(ActionType.SPLIT_EVENLY, {
+          id: this.foodData.id,
+        });
         break;
       case 'clear':
         this.foodData.removeAllParticipants();
+        this.store.fireAction(ActionType.CLEAR_PALETTE_PARTICIPANTS, {
+          id: this.foodData.id,
+        });
         break;
     }
   }

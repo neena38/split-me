@@ -30,15 +30,17 @@ export class ProfileListComponent {
   }
 
   onAddProfile() {
+    const existingProfiles = this.simpleProfile.getCurrentProfiles();
+    console.log(existingProfiles);
+    
     let dialogRef = this.dialog.open(CreateProfileModalComponent, {
       width: '250px',
-      data: this.profiles,
+      data: existingProfiles,
       panelClass: 'split-me-modal',
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        const profile = this.simpleProfile.add(result);
-        this.store.fireAction(ActionType.ADD_PROFILE, { profile: profile });
+        this.simpleProfile.add(result);
       }
     });
   }
@@ -67,6 +69,7 @@ export class ProfileListComponent {
     return this.foodPalette.paletteIDs;
   }
   get profiles() {
+    //XXreturn this.simpleProfile.profiles;
     return this.simpleProfile.profiles;
   }
   get selectionEnabled() {

@@ -25,7 +25,7 @@ export class StoreService {
     private toastr: ToastrService
   ) {
     this.state = {
-      profiles: this.profile.profiles,
+      profiles:[],
       palettes: this.palette.palettes,
       tax: this.details.tax,
       discount: this.details.discount,
@@ -157,7 +157,7 @@ export class StoreService {
 
   //initial load
   loadCloudState(newState: IAppState) {
-    this.profile.profiles = newState.profiles;
+   // this.profile.profiles = newState.profiles;
     this.palette.palettes = this.paletteCreation(newState.palettes);
     this.palette.updatePanelIds();
     this.details.tax = newState.tax;

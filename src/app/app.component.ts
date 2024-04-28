@@ -21,7 +21,7 @@ export class AppComponent {
 
     @Inject(DOCUMENT) private document: Document
   ) {
-    this.checkHostName();
+    // this.checkHostName();
   }
 
   @HostListener('window:keydown', ['$event'])
@@ -30,7 +30,8 @@ export class AppComponent {
   }
   @HostListener('window:beforeunload', ['$event'])
   canDeactivate(): boolean {
-    return this.foodPaletteService.palettes.length == 0;
+    return true;
+    // return this.foodPaletteService.palettes.length == 0;
   }
 
   checkHostName() {

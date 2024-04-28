@@ -21,11 +21,11 @@
     [cdkDropListConnectedTo]="paletteIDs"
     class="profiles-wrapper"
   >
-    <span *ngIf="!profiles.length" class="lead help-placeholder"
+    <span *ngIf="!(profiles | async)?.length" class="lead help-placeholder"
       >Manage your profiles by adding or importing them here</span
     >
     <div
-      *ngFor="let profile of profiles"
+      *ngFor="let profile of (profiles | async)"
       cdkDrag
       [cdkDragData]="profile"
       (cdkDragStarted)="dragStarted($event, profile)"

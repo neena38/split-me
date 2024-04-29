@@ -69,8 +69,7 @@ export class ProfileListComponent {
     return this.foodPalette.paletteIDs;
   }
   get profiles() {
-    //XXreturn this.simpleProfile.profiles;
-    return this.simpleProfile.profiles;
+    return this.simpleProfile.profiles$;
   }
   get selectionEnabled() {
     return this.simpleProfile.selections.length != 0;

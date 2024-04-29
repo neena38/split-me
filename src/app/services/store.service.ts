@@ -26,7 +26,7 @@ export class StoreService {
   ) {
     this.state = {
       profiles:[],
-      palettes: this.palette.palettes,
+      palettes: [],
       tax: this.details.tax,
       discount: this.details.discount,
     };
@@ -42,8 +42,8 @@ export class StoreService {
   }
 
   clearState() {
-    this.palette.palettes = [];
-    this.palette.updatePanelIds();
+   // this.palette.palettes = [];
+    // this.palette.updatePanelIds();
     this.details.tax = 0;
     this.details.discount = 0;
 
@@ -84,7 +84,7 @@ export class StoreService {
       case ActionType.ADD_PALETTE:
         if (payload.id) {
           const foodItem = new FoodItem('-', 0, [], payload.id);
-          this.palette.add(foodItem);
+       //   this.palette.add(foodItem);
         }
         break;
 
@@ -142,8 +142,8 @@ export class StoreService {
         break;
 
       case ActionType.SCAN_RECEIPT_ACTION:
-        this.palette.palettes = this.paletteCreation(payload.palettes);
-        this.palette.updatePanelIds();
+     //   this.palette.palettes = this.paletteCreation(payload.palettes);
+        // this.palette.updatePanelIds();
         break;
     }
 
@@ -158,8 +158,8 @@ export class StoreService {
   //initial load
   loadCloudState(newState: IAppState) {
    // this.profile.profiles = newState.profiles;
-    this.palette.palettes = this.paletteCreation(newState.palettes);
-    this.palette.updatePanelIds();
+ //   this.palette.palettes = this.paletteCreation(newState.palettes);
+    // this.palette.updatePanelIds();
     this.details.tax = newState.tax;
     this.details.discount = newState.discount;
   }
@@ -191,7 +191,8 @@ export class StoreService {
   }
 
   getPalette(id: string): FoodItem | undefined {
-    return this.palette.palettes.find((palette) => palette.id === id);
+    return undefined;
+  //  return this.palette.palettes.find((palette) => palette.id === id);
   }
 
   getParticipantsFromProfiles(palette: FoodItem, profiles: Profile[]) {

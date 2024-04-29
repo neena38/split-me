@@ -25,7 +25,7 @@ export class DetailsService {
     this.totalFoodAmount = this.foodPalette.getTotalAmount();
     this.contributorsMap = this.foodPalette.getIndividualContributions();
     this.participantsCount = this.contributorsMap.size;
-    this.dishesCount = this.foodPalette.palettes.length;
+    this.dishesCount = this.foodPalette.getCurrentPalettes().length;
     this.totalAmountMap = new Map<string, number>();
     let finalAmt: number = 0;
     for (let [name, money] of this.contributorsMap) {
@@ -73,7 +73,7 @@ export class DetailsService {
 
   getDishAmountDistribution(): DoughnutEntries[] {
     let dataMap: DoughnutEntries[] = [];
-    for (let palette of this.foodPalette.palettes) {
+    for (let palette of this.foodPalette.getCurrentPalettes()) {
       let entry: DoughnutEntries = {
         item: palette.logo + ' ' + palette.name,
         value: palette.totalContributions,

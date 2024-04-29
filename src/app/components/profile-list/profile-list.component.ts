@@ -66,7 +66,7 @@ export class ProfileListComponent {
   }
 
   get paletteIDs() {
-    return this.foodPalette.paletteIDs;
+    return this.foodPalette.paletteIds$;
   }
   get profiles() {
     return this.simpleProfile.profiles$;

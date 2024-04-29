@@ -18,7 +18,7 @@
     cdkDropList
     cdkDropListSortingDisabled
     id="profile-wrap-list"
-    [cdkDropListConnectedTo]="paletteIDs"
+    [cdkDropListConnectedTo]="(paletteIDs | async)!"
     class="profiles-wrapper"
   >
     <span *ngIf="!(profiles | async)?.length" class="lead help-placeholder"

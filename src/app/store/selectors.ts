@@ -7,6 +7,9 @@ export const profilesSelector = select(
 export const palettesSelector = select(
   (state: IApplicationState) => state.palettes
 );
+export const palettesIdSelector = select((state: IApplicationState) =>
+  state.palettes.map((palette) => palette.ID)
+);
 export const modifiersSelector = select(
   (state: IApplicationState) => state.modifiers
 );

@@ -1,19 +1,19 @@
 <div #itemWrapper class="food-items-wrapper shadow">
-  <div class="food-items" [ngClass]="{ expand: !palettes.length }">
+  <div class="food-items" [ngClass]="{ expand: !(palettes$ | async)?.length }">
     <div
-      *ngIf="palettes.length"
+      *ngIf="(palettes$ | async)?.length"
       class="item-panel-wrapper"
-      [@cardAnimation]="palettes.length"
+      [@cardAnimation]="(palettes$ | async)?.length"
     >
       <app-food-item-panel
         style="display: block"
-        *ngFor="let palette of palettes; let i = index"
+        *ngFor="let palette of palettes$ | async; let i = index"
         [foodData]="palette"
-        [paletteIds]="ids"
+        [paletteIds]="(paletteIds$ | async)!"
         (removePanel)="removeFoodTile($event)"
       ></app-food-item-panel>
     </div>
-    <div *ngIf="!palettes.length" class="instruction-wrapper px-3">
+    <div *ngIf="!(palettes$ | async)?.length" class="instruction-wrapper px-3">
       <div class="add-food-wrapper">
         <img
           class="new-food-logo"
@@ -23,12 +23,11 @@
         <span class="lead help-placeholder"
           >To add your first dish, simply click on the add button</span
         >
-        <div class="btn-stack ">
+        <div class="btn-stack">
           <button
             matTooltip="add new palette"
             type="button"
             (click)="onAddFoodPalette()"
-           
           >
             <img src="../../../assets/icons/plus-icon.svg" alt="" />
             <span class="lead">Add Dishes</span>
@@ -49,13 +48,13 @@
     </div>
   </div>
   <span
-    *ngIf="palettes.length"
+    *ngIf="(palettes$ | async)?.length"
     class="add-action"
     style="display: flex; justify-content: center"
   >
     <button
       matTooltip="add new palette"
-      [@buttonAnimation]="palettes.length"
+      [@buttonAnimation]="(palettes$ | async)?.length"
       type="button"
       class="add-btn"
       (click)="onAddFoodPalette()"

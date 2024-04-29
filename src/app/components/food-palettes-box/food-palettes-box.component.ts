@@ -1,15 +1,14 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
 import { buttonAnimation, cardAnimation } from 'src/app/classes/animations';
+import { ActionType } from 'src/app/classes/constants';
 import { FoodItem } from 'src/app/classes/food-item';
-import { IBillEntry } from 'src/app/classes/interfaces';
 import { HelpDialogComponent } from 'src/app/help-dialog/help-dialog/help-dialog.component';
 import { pages } from 'src/app/help-dialog/help-dialog/help-page-utils';
 import { FoodPaletteService } from 'src/app/services/food-palette.service';
 import { KeyBindingService } from 'src/app/services/keybinding.service';
-import { ImportModalComponent } from '../import-modal/import-modal.component';
 import { StoreService } from 'src/app/services/store.service';
-import { ActionType } from 'src/app/classes/constants';
 @Component({
   selector: 'app-food-palettes-box',
   templateUrl: './food-palettes-box.component.html',
@@ -19,6 +18,7 @@ import { ActionType } from 'src/app/classes/constants';
 export class FoodPalettesBoxComponent {
   @ViewChild('itemWrapper') myScrollContainer!: ElementRef;
 
+  paletteIds$: Observable<string[]>;
   constructor(
     private foodPalette: FoodPaletteService,
     private keyBinding: KeyBindingService,
@@ -26,12 +26,11 @@ export class FoodPalettesBoxComponent {
     private store: StoreService
   ) {
     this.keyBinding.handleAltF(this.onAddFoodPalette.bind(this));
+    this.paletteIds$ = this.foodPalette.paletteIds$;
   }
 
   onAddFoodPalette() {
-    const id = this.foodPalette.add();
-    this.store.fireAction(ActionType.ADD_PALETTE, { id: id });
-
+    this.foodPalette.add();
     //TODO create a smoother transition for this or discard scroll effect
     setTimeout(
       () =>
@@ -42,22 +41,23 @@ export class FoodPalettesBoxComponent {
   }
 
   onImportBill() {
-    let dialogRef = this.dialog.open(ImportModalComponent, {
-      panelClass: 'split-me-modal',
-      width: '520px',
-    });
-    dialogRef.afterClosed().subscribe((result: IBillEntry[]) => {
-      if (result && result.length > 0) {
-        result.forEach((palette) => {
-          const id = this.foodPalette.add(
-            new FoodItem(palette.item, palette.amount, [])
-          );
-        });
-        this.store.fireAction(ActionType.SCAN_RECEIPT_ACTION, {
-          palettes: this.foodPalette.palettes,
-        });
-      }
-    });
+    //TODO refactor as action whole
+    //    let dialogRef = this.dialog.open(ImportModalComponent, {
+    //      panelClass: 'split-me-modal',
+    //      width: '520px',
+    //    });
+    //    dialogRef.afterClosed().subscribe((result: IBillEntry[]) => {
+    //      if (result && result.length > 0) {
+    //        result.forEach((palette) => {
+    //          const id = this.foodPalette.add(
+    //            new FoodItem(palette.item, palette.amount, [])
+    //          );
+    //        });
+    //        this.store.fireAction(ActionType.SCAN_RECEIPT_ACTION, {
+    //          palettes: this.foodPalette.palettes,
+    //        });
+    //      }
+    //    });
   }
 
   removeFoodTile(item: FoodItem) {
@@ -73,11 +73,7 @@ export class FoodPalettesBoxComponent {
     });
   }
 
-  get palettes() {
-    return this.foodPalette.palettes;
-  }
-
-  get ids() {
-    return this.foodPalette.paletteIDs;
+  get palettes$() {
+    return this.foodPalette.palettes$;
   }
 }

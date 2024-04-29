@@ -1,44 +1,36 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ActionType } from '../classes/constants';
 import { FoodItem } from '../classes/food-item';
 import { IorderDetails } from '../classes/interfaces';
+import { getID } from '../classes/uuid';
+import { AppStoreService } from '../store/app-store.service';
+import { palettesIdSelector, palettesSelector } from '../store/selectors';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FoodPaletteService {
-  genRand = (len: number) => {
-    return Math.random()
-      .toString(36)
-      .substring(2, len + 2);
-  };
-  palettes: FoodItem[] = [];
-  paletteIDs: string[] = [];
+  palettes$: Observable<FoodItem[]>;
+  paletteIds$: Observable<string[]>;
 
-  constructor() {
-    this.updatePanelIds();
+  constructor(private store: AppStoreService) {
+    this.palettes$ = this.store.selector(palettesSelector);
+    this.paletteIds$ = this.store.selector(palettesIdSelector);
   }
 
-  add(palette: FoodItem = new FoodItem('', 0, [])): string {
-    if (!palette.name) {
-      palette.name = 'item ' + palette.foodID;
-    }
-    this.palettes.push(palette);
-    this.updatePanelIds();
-    return palette.id;
+  add() {
+    this.store.dispatch(ActionType.ADD_PALETTE, { id: getID() });
   }
 
   remove(item: FoodItem) {
-    this.palettes = this.palettes.filter((x) => x.id !== item.id);
-    this.updatePanelIds();
-  }
-
-  updatePanelIds() {
-    this.paletteIDs = this.palettes.map((x) => x.ID);
+    // this.palettes = this.palettes.filter((x) => x.id !== item.id);
   }
 
   getTotalAmount() {
+    const palettes = this.getCurrentPalettes();
     let total: number = 0;
-    this.palettes.forEach((item) => {
+    palettes.forEach((item) => {
       total += item.totalContributions;
     });
     return Math.round(total * 100) / 100;
@@ -51,8 +43,9 @@ export class FoodPaletteService {
   getIndividualContributions(): Map<string, number> {
     const contMap = new Map<string, number>();
 
-    for (let i = 0; i < this.palettes.length; i++) {
-      const participants = this.palettes[i].participants;
+    const palettes = this.getCurrentPalettes();
+    for (let i = 0; i < palettes.length; i++) {
+      const participants = palettes[i].participants;
 
       for (let j = 0; j < participants.length; j++) {
         const participant = participants[j];
@@ -70,9 +63,10 @@ export class FoodPaletteService {
    */
   getIndividualOrders(): Map<string, IorderDetails[]> {
     const indDetailsMap = new Map<string, IorderDetails[]>();
+    const palettes = this.getCurrentPalettes();
 
-    for (let i = 0; i < this.palettes.length; i++) {
-      const dish = this.palettes[i];
+    for (let i = 0; i < palettes.length; i++) {
+      const dish = palettes[i];
       const participants = dish.participants;
 
       for (let j = 0; j < participants.length; j++) {
@@ -90,5 +84,9 @@ export class FoodPaletteService {
       }
     }
     return indDetailsMap;
+  }
+
+  getCurrentPalettes() {
+    return this.store.getValue().palettes;
   }
 }

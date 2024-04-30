@@ -128,7 +128,7 @@ export class StoreService {
         const profile = payload.profile;
         if (profile && profile.name) {
           const newProfile = this.profile.add(profile.name);
-          newProfile.hue = profile.hue;
+          // newProfile.hue = profile.hue;
         }
         break;
 

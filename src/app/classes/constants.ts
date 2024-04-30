@@ -26,8 +26,17 @@ export enum ActionType {
   SCAN_RECEIPT_ACTION,
 }
 
+export enum LocalActionType{
+  SET_PROFILES,
+}
+
 export interface Action {
   type: ActionType;
+  payload: any;
+}
+
+export interface LocalAction {
+  type: LocalActionType;
   payload: any;
 }
 

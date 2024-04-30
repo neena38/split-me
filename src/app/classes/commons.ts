@@ -10,6 +10,10 @@ export function getCurrencyString(amount: number) {
   return formatCurrency(amount, 'en-US', '₹', 'INR', '1.2-2');
 }
 
+export function getHue(){
+  return randomBetween(0,360);
+}
+
 export const profileSchema = {
   type: 'array',
   items: {

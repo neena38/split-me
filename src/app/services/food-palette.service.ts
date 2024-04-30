@@ -24,7 +24,7 @@ export class FoodPaletteService {
   }
 
   remove(item: FoodItem) {
-    // this.palettes = this.palettes.filter((x) => x.id !== item.id);
+    this.store.dispatch(ActionType.REMOVE_PALETTE, { id: item.id });
   }
 
   getTotalAmount() {
@@ -46,13 +46,10 @@ export class FoodPaletteService {
     const palettes = this.getCurrentPalettes();
     for (let i = 0; i < palettes.length; i++) {
       const participants = palettes[i].participants;
-
       for (let j = 0; j < participants.length; j++) {
         const participant = participants[j];
         const name = participant.name;
-        const contribution = participant.contribution;
-
-        contMap.set(name, (contMap.get(name) || 0) + contribution);
+        contMap.set(name, (contMap.get(name) || 0) + participant.contribution);
       }
     }
     return contMap;

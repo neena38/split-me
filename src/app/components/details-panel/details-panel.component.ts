@@ -12,7 +12,6 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class DetailsPanelComponent {
   constructor(
-    private foodPalette: FoodPaletteService,
     private details: DetailsService,
     private dialog: MatDialog,
     private toastr: ToastrService
@@ -31,11 +30,11 @@ export class DetailsPanelComponent {
     }
   }
 
-  get totalFoodBill() {
-    return this.foodPalette.getTotalAmount();
+  get total$() {
+    return this.details.totalAmount$;
   }
 
-  get finalTotal() {
-    return this.details.getCalculatedAmount();
+  get final$() {
+    return this.details.finalAmount$;
   }
 }

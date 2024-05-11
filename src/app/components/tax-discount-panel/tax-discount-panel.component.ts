@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { ActionType } from 'src/app/classes/constants';
+import { addbits } from 'src/app/classes/commons';
 import { DetailsService } from 'src/app/services/details.service';
-import { StoreService } from 'src/app/services/store.service';
-import { AppStoreService } from 'src/app/store/app-store.service';
 
 @Component({
   selector: 'app-tax-discount-panel',
@@ -10,23 +8,17 @@ import { AppStoreService } from 'src/app/store/app-store.service';
   styleUrls: ['./tax-discount-panel.component.scss'],
 })
 export class TaxDiscountPanelComponent {
-  constructor(private details: DetailsService, private store: AppStoreService) {}
+  constructor(private details: DetailsService) {}
+
   onTaxDiscountChange(tax: string, discount: string) {
     const expRegx = /(?:(?:^|[-+])(?:\s*-?\d+(\.\d+)?\s*))+$/;
     if (expRegx.test(tax)) {
-      tax = this.details.addbits(tax).toString();
+      tax = addbits(tax).toString();
     }
-    this.store.dispatch(ActionType.UPDATE_TAX_DISCOUNT, {
-      tax: this.details.tax,
-      discount: this.details.discount,
-    });
+    this.details.updateModifiers(parseFloat(tax), parseFloat(discount));
   }
 
-  get taxValue() {
-    return this.details.tax;
-  }
-
-  get discountValue() {
-    return this.details.discount;
+  get modifiers$() {
+    return this.details.modifiers$;
   }
 }

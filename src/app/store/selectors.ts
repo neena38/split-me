@@ -13,3 +13,20 @@ export const palettesIdSelector = select((state: IApplicationState) =>
 export const modifiersSelector = select(
   (state: IApplicationState) => state.modifiers
 );
+
+export const totalAmountSelector = select((state: IApplicationState) => {
+  let total: number = 0;
+  state.palettes.forEach((item) => {
+    total += item.totalContributions;
+  });
+  return Math.round(total * 100) / 100;
+});
+
+export const finalAmountSelector = select((state: IApplicationState) => {
+  let total: number = 0;
+  state.palettes.forEach((item) => {
+    total += item.totalContributions;
+  });
+  total += state.modifiers.tax - state.modifiers.discount;
+  return Math.round(total * 100) / 100;
+});

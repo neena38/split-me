@@ -7,7 +7,7 @@
         appInputClickSelect
         class="form-control"
         (change)="onTaxDiscountChange(taxInp.value, discountInp.value)"
-        [value]="taxValue"
+        [value]="(modifiers$ | async)?.tax"
     /></span>
   </div>
   <div class="td-panel-item">
@@ -18,7 +18,7 @@
         appInputClickSelect
         class="form-control"
         (change)="onTaxDiscountChange(taxInp.value, discountInp.value)"
-        [value]="discountValue"
+        [value]="(modifiers$ | async)?.discount"
     /></span>
   </div>
 </div>

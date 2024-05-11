@@ -2,13 +2,19 @@ import { Injectable } from '@angular/core';
 import { FoodPaletteService } from './food-palette.service';
 import { DoughnutEntries, IContributors } from '../classes/interfaces';
 import { IndividualSummary } from '../classes/individual-summary';
+import { AppStoreService } from '../store/app-store.service';
+import { Observable } from 'rxjs';
+import {
+  finalAmountSelector,
+  modifiersSelector,
+  totalAmountSelector,
+} from '../store/selectors';
+import { ActionType } from '../classes/constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DetailsService {
-  tax: number = 0;
-  discount: number = 0;
   totalFoodAmount: number = 0;
   finalTotal: number = 0;
   participantsCount: number = 0;
@@ -16,12 +22,22 @@ export class DetailsService {
   contributorsMap: Map<string, number>;
   totalAmountMap: Map<string, number>;
   individualSummaries: IndividualSummary[] = [];
-  constructor(private foodPalette: FoodPaletteService) {
+  modifiers$: Observable<{ tax: number; discount: number }>;
+  totalAmount$: Observable<number>;
+  finalAmount$: Observable<number>;
+  constructor(
+    private foodPalette: FoodPaletteService,
+    private store: AppStoreService
+  ) {
+    this.modifiers$ = this.store.selector(modifiersSelector);
+    this.totalAmount$ = this.store.selector(totalAmountSelector);
+    this.finalAmount$ = this.store.selector(finalAmountSelector);
     this.contributorsMap = new Map<string, number>();
     this.totalAmountMap = new Map<string, number>();
   }
 
   calculateFinalTotal() {
+    const modifiers = this.getCurrentModifiers();
     this.totalFoodAmount = this.foodPalette.getTotalAmount();
     this.contributorsMap = this.foodPalette.getIndividualContributions();
     this.participantsCount = this.contributorsMap.size;
@@ -29,8 +45,8 @@ export class DetailsService {
     this.totalAmountMap = new Map<string, number>();
     let finalAmt: number = 0;
     for (let [name, money] of this.contributorsMap) {
-      let taxAmt = (money / this.totalFoodAmount) * this.tax;
-      let discAmt = (money / this.totalFoodAmount) * this.discount;
+      let taxAmt = (money / this.totalFoodAmount) * modifiers.tax;
+      let discAmt = (money / this.totalFoodAmount) * modifiers.discount;
 
       let newAmount = Math.round((money + taxAmt - discAmt) * 100) / 100;
       finalAmt += money + taxAmt - discAmt;
@@ -38,6 +54,13 @@ export class DetailsService {
     }
 
     this.finalTotal = Math.round(finalAmt * 100) / 100;
+  }
+
+  updateModifiers(tax: number, discount: number) {
+    this.store.dispatch(ActionType.UPDATE_TAX_DISCOUNT, {
+      tax: tax,
+      discount: discount,
+    });
   }
 
   generateDataSourceMap(): IContributors[] {
@@ -97,22 +120,7 @@ export class DetailsService {
     }
   }
 
-  getCalculatedAmount() {
-    // return the total amount with tax and discount integrated
-    this.totalFoodAmount = this.foodPalette.getTotalAmount();
-    return (
-      Math.round((this.totalFoodAmount + this.tax - this.discount) * 100) / 100
-    );
-  }
-
-  //utility function
-  addbits(s: string): number {
-    const regex = /[+\-]?([0-9\.]+)/g;
-    const matches = s.replace(/\s/g, '').match(regex) || [];
-    let sum = 0;
-    for (const val of matches) {
-      sum += parseFloat(val);
-    }
-    return sum;
+  getCurrentModifiers() {
+    return this.store.getValue().modifiers;
   }
 }

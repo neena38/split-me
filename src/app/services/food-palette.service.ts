@@ -5,7 +5,7 @@ import { FoodItem } from '../classes/food-item';
 import { IBillEntry, IorderDetails } from '../classes/interfaces';
 import { getID } from '../classes/uuid';
 import { AppStoreService } from '../store/app-store.service';
-import { palettesIdSelector, palettesSelector } from '../store/selectors';
+import { palettesIdSelector, palettesSelector, totalAmountSelector } from '../store/selectors';
 
 @Injectable({
   providedIn: 'root',

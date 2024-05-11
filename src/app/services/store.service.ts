@@ -27,8 +27,8 @@ export class StoreService {
     this.state = {
       profiles: [],
       palettes: [],
-      tax: this.details.tax,
-      discount: this.details.discount,
+      tax: 0,
+      discount: 0,
     };
     this.stateSubject = new BehaviorSubject<Action>({} as Action);
     this.state$ = this.stateSubject.asObservable();
@@ -41,8 +41,8 @@ export class StoreService {
   clearState() {
     // this.palette.palettes = [];
     // this.palette.updatePanelIds();
-    this.details.tax = 0;
-    this.details.discount = 0;
+    // this.details.tax = 0;
+    // this.details.discount = 0;
 
     this.toastr.info('You have left the room', undefined, {
       titleClass: 'socket-title',
@@ -134,8 +134,8 @@ export class StoreService {
         break;
 
       case ActionType.UPDATE_TAX_DISCOUNT:
-        this.details.tax = payload.tax;
-        this.details.discount = payload.discount;
+        // this.details.tax = payload.tax;
+        // this.details.discount = payload.discount;
         break;
 
       case ActionType.SCAN_RECEIPT_ACTION:
@@ -157,8 +157,8 @@ export class StoreService {
     // this.profile.profiles = newState.profiles;
     //   this.palette.palettes = this.paletteCreation(newState.palettes);
     // this.palette.updatePanelIds();
-    this.details.tax = newState.tax;
-    this.details.discount = newState.discount;
+  //  this.details.tax = newState.tax;
+  //  this.details.discount = newState.discount;
   }
   paletteCreation(storeItem: FoodItem[]) {
     let palettes: FoodItem[] = [];

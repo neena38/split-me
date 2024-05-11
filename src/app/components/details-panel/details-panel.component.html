@@ -5,12 +5,12 @@
     <app-amount-display
       [title]="'Dish Prices'"
       [logoSrc]="'assets/icons/dish-icon.svg'"
-      [amount]="totalFoodBill"
+      [amount]="(total$ | async)!"
     ></app-amount-display>
     <app-amount-display
       [title]="'Bill Total'"
       [logoSrc]="'assets/icons/scroll-icon.svg'"
-      [amount]="finalTotal"
+      [amount]="(final$ | async)!"
     ></app-amount-display>
   </div>
   <app-tax-discount-panel></app-tax-discount-panel>

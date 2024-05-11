@@ -4,11 +4,13 @@ import { Observable } from 'rxjs';
 import { buttonAnimation, cardAnimation } from 'src/app/classes/animations';
 import { ActionType } from 'src/app/classes/constants';
 import { FoodItem } from 'src/app/classes/food-item';
+import { IBillEntry } from 'src/app/classes/interfaces';
 import { HelpDialogComponent } from 'src/app/help-dialog/help-dialog/help-dialog.component';
 import { pages } from 'src/app/help-dialog/help-dialog/help-page-utils';
 import { FoodPaletteService } from 'src/app/services/food-palette.service';
 import { KeyBindingService } from 'src/app/services/keybinding.service';
-import { StoreService } from 'src/app/services/store.service';
+import { AppStoreService } from 'src/app/store/app-store.service';
+import { ImportModalComponent } from '../import-modal/import-modal.component';
 @Component({
   selector: 'app-food-palettes-box',
   templateUrl: './food-palettes-box.component.html',
@@ -23,7 +25,7 @@ export class FoodPalettesBoxComponent {
     private foodPalette: FoodPaletteService,
     private keyBinding: KeyBindingService,
     private dialog: MatDialog,
-    private store: StoreService
+    private store: AppStoreService
   ) {
     this.keyBinding.handleAltF(this.onAddFoodPalette.bind(this));
     this.paletteIds$ = this.foodPalette.paletteIds$;
@@ -41,28 +43,19 @@ export class FoodPalettesBoxComponent {
   }
 
   onImportBill() {
-    //TODO refactor as action whole
-    //    let dialogRef = this.dialog.open(ImportModalComponent, {
-    //      panelClass: 'split-me-modal',
-    //      width: '520px',
-    //    });
-    //    dialogRef.afterClosed().subscribe((result: IBillEntry[]) => {
-    //      if (result && result.length > 0) {
-    //        result.forEach((palette) => {
-    //          const id = this.foodPalette.add(
-    //            new FoodItem(palette.item, palette.amount, [])
-    //          );
-    //        });
-    //        this.store.fireAction(ActionType.SCAN_RECEIPT_ACTION, {
-    //          palettes: this.foodPalette.palettes,
-    //        });
-    //      }
-    //    });
+    let dialogRef = this.dialog.open(ImportModalComponent, {
+      panelClass: 'split-me-modal',
+      width: '520px',
+    });
+    dialogRef.afterClosed().subscribe((result: IBillEntry[]) => {
+      if (result && result.length > 0) {
+        this.foodPalette.scannedReceipt(result);
+      }
+    });
   }
 
   removeFoodTile(item: FoodItem) {
-    this.foodPalette.remove(item);
-    this.store.fireAction(ActionType.REMOVE_PALETTE, { id: item.id });
+    this.store.dispatch(ActionType.REMOVE_PALETTE, { id: item.id });
   }
 
   openDialog() {

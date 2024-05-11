@@ -9,7 +9,6 @@ export enum ReceiptType {
 }
 
 export enum ActionType {
-  DEFAULT,
   ADD_PROFILE,
   REMOVE_PROFILE,
   ADD_PALETTE,

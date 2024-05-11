@@ -25,15 +25,12 @@ export class StoreService {
     private toastr: ToastrService
   ) {
     this.state = {
-      profiles:[],
+      profiles: [],
       palettes: [],
       tax: this.details.tax,
       discount: this.details.discount,
     };
-    this.stateSubject = new BehaviorSubject<Action>({
-      type: ActionType.DEFAULT,
-      payload: null,
-    });
+    this.stateSubject = new BehaviorSubject<Action>({} as Action);
     this.state$ = this.stateSubject.asObservable();
   }
 
@@ -42,7 +39,7 @@ export class StoreService {
   }
 
   clearState() {
-   // this.palette.palettes = [];
+    // this.palette.palettes = [];
     // this.palette.updatePanelIds();
     this.details.tax = 0;
     this.details.discount = 0;
@@ -84,7 +81,7 @@ export class StoreService {
       case ActionType.ADD_PALETTE:
         if (payload.id) {
           const foodItem = new FoodItem('-', 0, [], payload.id);
-       //   this.palette.add(foodItem);
+          //   this.palette.add(foodItem);
         }
         break;
 
@@ -142,7 +139,7 @@ export class StoreService {
         break;
 
       case ActionType.SCAN_RECEIPT_ACTION:
-     //   this.palette.palettes = this.paletteCreation(payload.palettes);
+        //   this.palette.palettes = this.paletteCreation(payload.palettes);
         // this.palette.updatePanelIds();
         break;
     }
@@ -157,8 +154,8 @@ export class StoreService {
 
   //initial load
   loadCloudState(newState: IAppState) {
-   // this.profile.profiles = newState.profiles;
- //   this.palette.palettes = this.paletteCreation(newState.palettes);
+    // this.profile.profiles = newState.profiles;
+    //   this.palette.palettes = this.paletteCreation(newState.palettes);
     // this.palette.updatePanelIds();
     this.details.tax = newState.tax;
     this.details.discount = newState.discount;
@@ -192,7 +189,7 @@ export class StoreService {
 
   getPalette(id: string): FoodItem | undefined {
     return undefined;
-  //  return this.palette.palettes.find((palette) => palette.id === id);
+    //  return this.palette.palettes.find((palette) => palette.id === id);
   }
 
   getParticipantsFromProfiles(palette: FoodItem, profiles: Profile[]) {

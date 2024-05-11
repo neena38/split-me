@@ -30,7 +30,6 @@ export class FoodInputFieldComponent implements OnInit {
       });
     }
   }
-  @Output('nameUpdate') foodName = new EventEmitter<string>();
   @Output('updateIcon') updateIcon = new EventEmitter<string>();
   @Output('socketUpdate') updateSocket = new EventEmitter<string>();
 
@@ -49,7 +48,7 @@ export class FoodInputFieldComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.initialName.startsWith('item')) {
+    if (this.initialName.startsWith('-')) {
       setTimeout(() => {
         this.dishName.nativeElement.select();
       }, 400);
@@ -60,7 +59,6 @@ export class FoodInputFieldComponent implements OnInit {
   }
 
   private filterFood(value: string): foodItem[] {
-    if (value != '') this.foodName.emit(value);
     const filterValue = value.toLowerCase();
     return foodNames
       .filter((food) => food.name.toLowerCase().includes(filterValue))

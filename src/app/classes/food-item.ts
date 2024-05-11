@@ -37,16 +37,7 @@ export class FoodItem {
     });
   }
 
-  public addParticipant(participant: Participant) {
-    let isExist = false;
-    this.participants.forEach((p) => {
-      if (p.profile.name === participant.profile.name) {
-        isExist = true;
-        //participant already exists
-      }
-    });
-    if (!isExist) this.participants.push(participant);
-  }
+
 
   public removeAllParticipants() {
     this.participants = [];

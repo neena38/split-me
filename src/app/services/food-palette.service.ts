@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ActionType } from '../classes/constants';
 import { FoodItem } from '../classes/food-item';
-import { IorderDetails } from '../classes/interfaces';
+import { IBillEntry, IorderDetails } from '../classes/interfaces';
 import { getID } from '../classes/uuid';
 import { AppStoreService } from '../store/app-store.service';
 import { palettesIdSelector, palettesSelector } from '../store/selectors';
@@ -21,6 +21,14 @@ export class FoodPaletteService {
 
   add() {
     this.store.dispatch(ActionType.ADD_PALETTE, { id: getID() });
+  }
+
+  scannedReceipt(result: IBillEntry[]) {
+    const ids = Array.from({ length: result.length }, () => getID());
+    this.store.dispatch(ActionType.SCAN_RECEIPT_ACTION, {
+      result: result,
+      ids: ids,
+    });
   }
 
   remove(item: FoodItem) {

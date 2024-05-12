@@ -23,10 +23,6 @@ export class AppStoreService {
       },
       withProps<IApplicationState>(initialState)
     );
-
-    this.store.subscribe((data) => {
-      console.log(data);
-    });
   }
 
   dispatch(type: ActionType, payload: any) {

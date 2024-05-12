@@ -37,8 +37,6 @@ export class FoodItem {
     });
   }
 
-
-
   public removeAllParticipants() {
     this.participants = [];
   }

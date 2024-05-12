@@ -25,7 +25,6 @@ export class FoodPalettesBoxComponent {
     private foodPalette: FoodPaletteService,
     private keyBinding: KeyBindingService,
     private dialog: MatDialog,
-    private store: AppStoreService
   ) {
     this.keyBinding.handleAltF(this.onAddFoodPalette.bind(this));
     this.paletteIds$ = this.foodPalette.paletteIds$;
@@ -55,7 +54,7 @@ export class FoodPalettesBoxComponent {
   }
 
   removeFoodTile(item: FoodItem) {
-    this.store.dispatch(ActionType.REMOVE_PALETTE, { id: item.id });
+    this.foodPalette.remove(item);
   }
 
   openDialog() {

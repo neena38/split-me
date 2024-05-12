@@ -107,17 +107,15 @@ export class DetailsService {
   }
 
   generateIndividualSummary() {
-    let indivualOrders = this.foodPalette.getIndividualOrders();
-    this.individualSummaries = [];
-    for (let [name, orders] of indivualOrders.entries()) {
-      let summary = new IndividualSummary(
-        name,
-        orders,
-        this.contributorsMap.get(name)!,
-        this.totalAmountMap.get(name)!
-      );
-      this.individualSummaries.push(summary);
-    }
+    const individualOrders = this.foodPalette.getIndividualOrders();
+    this.individualSummaries = Array.from(
+      individualOrders.entries(),
+      ([name, orders]) => {
+        const contribution = this.contributorsMap.get(name)!;
+        const totalAmount = this.totalAmountMap.get(name)!;
+        return new IndividualSummary(name, orders, contribution, totalAmount);
+      }
+    );
   }
 
   getCurrentModifiers() {

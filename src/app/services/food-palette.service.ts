@@ -5,7 +5,7 @@ import { FoodItem } from '../classes/food-item';
 import { IBillEntry, IorderDetails } from '../classes/interfaces';
 import { getID } from '../classes/uuid';
 import { AppStoreService } from '../store/app-store.service';
-import { palettesIdSelector, palettesSelector, totalAmountSelector } from '../store/selectors';
+import { palettesIdSelector, palettesSelector } from '../store/selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -37,11 +37,7 @@ export class FoodPaletteService {
 
   getTotalAmount() {
     const palettes = this.getCurrentPalettes();
-    let total: number = 0;
-    palettes.forEach((item) => {
-      total += item.totalContributions;
-    });
-    return Math.round(total * 100) / 100;
+    return palettes.reduce((total, item) => total + item.totalContributions, 0);
   }
 
   /**
@@ -50,14 +46,11 @@ export class FoodPaletteService {
    */
   getIndividualContributions(): Map<string, number> {
     const contMap = new Map<string, number>();
-
     const palettes = this.getCurrentPalettes();
-    for (let i = 0; i < palettes.length; i++) {
-      const participants = palettes[i].participants;
-      for (let j = 0; j < participants.length; j++) {
-        const participant = participants[j];
-        const name = participant.name;
-        contMap.set(name, (contMap.get(name) || 0) + participant.contribution);
+    for (const palette of palettes) {
+      for (const participant of palette.participants) {
+        const { name, contribution } = participant;
+        contMap.set(name, (contMap.get(name) || 0) + contribution);
       }
     }
     return contMap;
@@ -70,22 +63,18 @@ export class FoodPaletteService {
     const indDetailsMap = new Map<string, IorderDetails[]>();
     const palettes = this.getCurrentPalettes();
 
-    for (let i = 0; i < palettes.length; i++) {
-      const dish = palettes[i];
-      const participants = dish.participants;
-
-      for (let j = 0; j < participants.length; j++) {
-        const participant = participants[j];
-        const name = participant.name;
-
+    for (const palette of palettes) {
+      const { logo, name, price, participants } = palette;
+      for (const participant of participants) {
+        const { name: participantName, contribution } = participant;
         const detail: IorderDetails = {
-          food_name: dish.logo + ' ' + dish.name,
-          contribution: participant.contribution,
-          quantity: participant.contribution / dish.price,
+          food_name: `${logo} ${name}`,
+          contribution: contribution,
+          quantity: contribution / price,
         };
-        const orders = indDetailsMap.get(name) || [];
+        const orders = indDetailsMap.get(participantName) || [];
         orders.push(detail);
-        indDetailsMap.set(name, orders);
+        indDetailsMap.set(participantName, orders);
       }
     }
     return indDetailsMap;

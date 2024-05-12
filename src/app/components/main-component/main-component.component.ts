@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { IAppState } from '../header/header.component';
-import { SocketService } from 'src/app/services/socket.service';
-import { RoomService } from 'src/app/services/room.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { getID } from 'src/app/classes/uuid';
 import { MatDialog } from '@angular/material/dialog';
-import { NicknameModalComponent } from '../nickname-modal/nickname-modal.component';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { lastValueFrom } from 'rxjs';
+import { getID } from 'src/app/classes/uuid';
+import { RoomService } from 'src/app/services/room.service';
+import { SocketService } from 'src/app/services/socket.service';
+import { IApplicationState } from 'src/app/store/store';
+import { NicknameModalComponent } from '../nickname-modal/nickname-modal.component';
 
 @Component({
   selector: 'app-main-component',
@@ -49,7 +49,7 @@ export class MainComponentComponent implements OnInit {
     this.roomService.roomId = roomId;
     this.roomService.roomStatus = 'connected';
     try {
-      const data: IAppState = await lastValueFrom(
+      const data: IApplicationState = await lastValueFrom(
         this.roomService.getRoomData(roomId)
       );
       if (data) {

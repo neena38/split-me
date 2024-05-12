@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { ToastrService } from 'ngx-toastr';
 import { Action } from '../classes/constants';
-import { StoreService } from './store.service';
+import { AppStoreService } from '../store/app-store.service';
 export interface IsocketMessage {
   id: ISocketUserInfo;
   action: string;
@@ -25,7 +25,7 @@ export class SocketService {
     username: '',
   };
 
-  constructor(private store: StoreService, private toast: ToastrService) {}
+  constructor(private store: AppStoreService, private toast: ToastrService) {}
 
   setUserInfo(id: string, name: string) {
     this.user = { userId: id, username: name };
@@ -55,7 +55,7 @@ export class SocketService {
       'UpdateData',
       (user: ISocketUserInfo, action: Action) => {
         if (user.userId != this.user.userId) {
-          this.store.handleAction(action, this.user.username);
+          this.store.cloudDispatch(action, this.user.username);
         }
       }
     );

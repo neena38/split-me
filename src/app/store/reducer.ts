@@ -1,3 +1,4 @@
+import { getMessage } from '../classes/actionMessage';
 import { Action, ActionType } from '../classes/constants';
 import { FoodItem } from '../classes/food-item';
 import { IBillEntry } from '../classes/interfaces';
@@ -284,4 +285,8 @@ function scanReceipt(
 
 function getPalette(id: string, palettes: FoodItem[]): FoodItem | undefined {
   return palettes.find((palette) => palette.id === id);
+}
+
+export function generateMessage(action: Action, palettes: FoodItem[]) {
+  return getMessage(action, getPalette(action.payload.id, palettes));
 }

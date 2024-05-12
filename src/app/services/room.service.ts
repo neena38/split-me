@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Action } from '../classes/constants';
-import { IAppState } from '../components/header/header.component';
+import { AppStoreService } from '../store/app-store.service';
+import { IApplicationState } from '../store/store';
 import { SocketService } from './socket.service';
-import { StoreService } from './store.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,10 +15,10 @@ export class RoomService {
   roomId: string = '';
   constructor(
     private http: HttpClient,
-    private store: StoreService,
+    private store: AppStoreService,
     private socket: SocketService
   ) {
-    this.store.state$.subscribe((action) => {
+    this.store.firedAction$.subscribe((action) => {
       this.notifyChanges(action);
     });
   }
@@ -27,12 +27,12 @@ export class RoomService {
     this.roomStatus = 'connecting';
     return this.http.post<{ roomId: string }>(
       `${this.apiUrl}/createRoom`,
-      this.store.state
+      this.store.getValue()
     );
   }
-
-  getRoomData(roomId: string): Observable<IAppState> {
-    return this.http.get<IAppState>(`${this.apiUrl}/room/${roomId}`);
+  //TODO change in backend type change from AppState to ApplicationState
+  getRoomData(roomId: string): Observable<IApplicationState> {
+    return this.http.get<IApplicationState>(`${this.apiUrl}/room/${roomId}`);
   }
 
   exitRoom() {
@@ -45,7 +45,7 @@ export class RoomService {
       this.socket.updateData(this.roomId, action);
   }
 
-  syncCloudData(data: IAppState) {
-    this.store.loadCloudState(data);
+  syncCloudData(data: IApplicationState) {
+    this.store.setState(data);
   }
 }

@@ -61,13 +61,11 @@ export class AppStoreService {
   }
 
   clearState() {
-    //TODO Implement this with Elf way
     this.store.reset();
   }
 
   setState(data: IApplicationState) {
-    //TODO Implement this with Elf Way
-    this.store.update((state) => data);
+    this.localDispatch(LocalActionType.SET_STATE, { state: data });
   }
 
   getValue(): IApplicationState {

@@ -1,4 +1,6 @@
 import { LocalAction, LocalActionType } from '../classes/constants';
+import { FoodItem } from '../classes/food-item';
+import { Participant } from '../classes/participant';
 import { Profile } from '../classes/profile';
 import { IApplicationState } from './store';
 
@@ -9,6 +11,7 @@ type ReducerFunction = (
 
 const reducerFunctions: { [key in LocalActionType]: ReducerFunction } = {
   [LocalActionType.SET_PROFILES]: setProfilesList,
+  [LocalActionType.SET_STATE]: setAppState,
 };
 
 function setProfilesList(
@@ -18,6 +21,30 @@ function setProfilesList(
   return {
     ...state,
     profiles: payload.profiles,
+  };
+}
+
+function setAppState(
+  state: IApplicationState,
+  payload: { state: IApplicationState }
+) {
+  const newState = payload.state;
+  //palettes creation
+  const newPalettes = newState.palettes.map(
+    (palette) =>
+      new FoodItem(
+        palette.name,
+        palette.price,
+        getParticipants(palette.participants),
+        palette.id
+      )
+  );
+
+  return {
+    ...state,
+    profiles: newState.profiles,
+    palettes: newPalettes,
+    modifiers: newState.modifiers,
   };
 }
 
@@ -31,4 +58,16 @@ export function localActionReducer(
     return reducerFunction(state, payload);
   }
   return state;
+}
+
+// Utility Fns()
+
+function getParticipants(parties: Participant[]) {
+  return parties.map(
+    (p) =>
+      new Participant(
+        new Profile(p.profile.name, p.profile.hue),
+        p.contribution
+      )
+  );
 }

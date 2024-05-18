@@ -27,6 +27,7 @@ export enum ActionType {
 
 export enum LocalActionType{
   SET_PROFILES,
+  SET_STATE,
 }
 
 export interface Action {

@@ -3,6 +3,7 @@ import {
   keyframes,
   query,
   stagger,
+  state,
   style,
   transition,
   trigger,
@@ -52,3 +53,11 @@ export const buttonAnimation = trigger('buttonAnimation', [
     animate('.3s ease-out', style({ transform: 'translateY(0)' })),
   ]),
 ]);
+
+// slide in animation when profile enters palette
+export const slideInAnimation = trigger('slideInAnimation', [
+      state('void', style({ transform: 'translateY(-50%)', opacity: 0 })),
+      transition(':enter', [
+        animate('250ms ease-out', style({ transform: 'translateY(0)', opacity: 1 }))
+      ])
+    ])

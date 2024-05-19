@@ -1,5 +1,6 @@
 import { CdkDragDrop, CdkDragStart } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { slideInAnimation } from 'src/app/classes/animations';
 import { ActionType } from 'src/app/classes/constants';
 import { FoodItem } from 'src/app/classes/food-item';
 import { Participant } from 'src/app/classes/participant';
@@ -11,7 +12,7 @@ import { AppStoreService } from 'src/app/store/app-store.service';
   selector: 'app-food-item-panel',
   templateUrl: './food-item-panel.component.html',
   styleUrls: ['./food-item-panel.component.scss'],
-  
+  animations: [slideInAnimation],
 })
 export class FoodItemPanelComponent {
   @Input() foodData!: FoodItem;

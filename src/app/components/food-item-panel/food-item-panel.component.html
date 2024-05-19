@@ -32,9 +32,13 @@
       [cdkDropListConnectedTo]="paletteIds"
       class="consumers-palette card-container"
       (cdkDropListDropped)="drop($event)"
+      (contextmenu)="toggleQuickAddPreview($event)"
     >
-      <span *ngIf="!participants.length" class="placeholder-text lead"
-        >Add contributors by dragging profiles here.</span
+      <span
+        *ngIf="!participants.length && !showSuggestions"
+        class="placeholder-text lead"
+        >Add contributors by dragging profiles here.<br />
+        Right Click to show quick suggestions</span
       >
       <div
         *ngFor="let participant of participants"
@@ -57,6 +61,21 @@
           ></app-profile-drag-preview>
         </div>
       </div>
+      <!-- preview -->
+      <ng-container *ngIf="showSuggestions">
+        <div
+          *ngFor="let participant of suggestionParticipants"
+          class="people-palette"
+        >
+          <app-advanced-profile
+            [participant]="participant"
+            [price]="foodData.price"
+            [preview]="true"
+            (addPreviewParticipant)="addPreviewParticipant($event)"
+          ></app-advanced-profile>
+        </div>
+      </ng-container>
+      <!-- end preview -->
     </div>
   </div>
   <div class="bottom-menu">

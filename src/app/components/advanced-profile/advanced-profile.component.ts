@@ -16,14 +16,17 @@ import { Participant } from 'src/app/classes/participant';
 export class AdvancedProfileComponent {
   @Input('participant') participant!: Participant;
   @Input('price') price: number = 0;
+  @Input('preview') isPreview = false;
   @Output() removeParticipant = new EventEmitter<Participant>();
   @Output() contributionUpdated = new EventEmitter<Participant>();
+  @Output() addPreviewParticipant = new EventEmitter<Participant>();
   @ViewChild(MatMenuTrigger)
   contextMenu: MatMenuTrigger | undefined;
   contextMenuPosition = { x: '0px', y: '0px' };
 
   onContextMenu(event: MouseEvent) {
     event.preventDefault();
+    event.stopPropagation();
     this.contextMenuPosition.x = event.clientX + 'px';
     this.contextMenuPosition.y = event.clientY + 'px';
 
@@ -31,6 +34,11 @@ export class AdvancedProfileComponent {
       this.contextMenu.openMenu();
     }
   }
+
+  onPreviewAdd() {
+    this.addPreviewParticipant.emit(this.participant);
+  }
+
   constructor() {}
 
   get color() {
@@ -39,7 +47,7 @@ export class AdvancedProfileComponent {
 
   //Context menu options
 
-  OnContributionUpdated(){
+  OnContributionUpdated() {
     this.contributionUpdated.emit(this.participant);
   }
 

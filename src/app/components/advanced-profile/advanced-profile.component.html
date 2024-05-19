@@ -1,7 +1,8 @@
 <div
   class="profile-wrapper"
-  (contextmenu)="onContextMenu($event)"
-  (click)="onContextMenu($event)"
+  (contextmenu)="isPreview ? null : onContextMenu($event)"
+  (click)="isPreview ? onPreviewAdd() : onContextMenu($event)"
+  [ngClass]="{ isPreview: isPreview }"
 >
   <span class="name">{{ participant.name }}</span>
   <img
@@ -19,10 +20,10 @@
 ></div>
 <!-- context menu -->
 <mat-menu #contextMenu="matMenu" class="individual-menu">
-   <app-individual-menu
-   [participant]="participant"
-   [price]="price"
-   (removeParticipant)="remove()"
-   (contributionUpdated)="OnContributionUpdated()"
-   ></app-individual-menu> 
+  <app-individual-menu
+    [participant]="participant"
+    [price]="price"
+    (removeParticipant)="remove()"
+    (contributionUpdated)="OnContributionUpdated()"
+  ></app-individual-menu>
 </mat-menu>

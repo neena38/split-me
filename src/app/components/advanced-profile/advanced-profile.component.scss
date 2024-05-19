@@ -6,6 +6,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
   background: linear-gradient(
     90deg,
     rgba(37, 37, 59, 1) 20%,
@@ -43,6 +44,14 @@
   }
   &:hover {
     background-color: rgb(184, 191, 252);
+  }
+}
+.isPreview{
+  opacity: 0.3;
+  &:hover{
+    filter:hue-rotate(10deg);
+    opacity: 0.5;
+    transform: translateY(-3px);
   }
 }
 

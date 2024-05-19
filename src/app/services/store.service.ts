@@ -157,8 +157,8 @@ export class StoreService {
     // this.profile.profiles = newState.profiles;
     //   this.palette.palettes = this.paletteCreation(newState.palettes);
     // this.palette.updatePanelIds();
-  //  this.details.tax = newState.tax;
-  //  this.details.discount = newState.discount;
+    //  this.details.tax = newState.tax;
+    //  this.details.discount = newState.discount;
   }
   paletteCreation(storeItem: FoodItem[]) {
     let palettes: FoodItem[] = [];

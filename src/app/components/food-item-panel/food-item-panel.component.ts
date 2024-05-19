@@ -3,12 +3,15 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActionType } from 'src/app/classes/constants';
 import { FoodItem } from 'src/app/classes/food-item';
 import { Participant } from 'src/app/classes/participant';
+import { Profile } from 'src/app/classes/profile';
+import { SimpleProfileService } from 'src/app/services/simple-profile.service';
 import { AppStoreService } from 'src/app/store/app-store.service';
 
 @Component({
   selector: 'app-food-item-panel',
   templateUrl: './food-item-panel.component.html',
   styleUrls: ['./food-item-panel.component.scss'],
+  
 })
 export class FoodItemPanelComponent {
   @Input() foodData!: FoodItem;
@@ -16,7 +19,12 @@ export class FoodItemPanelComponent {
   @Output() removePanel = new EventEmitter<FoodItem>();
 
   totalRate: number = 0;
-  constructor(private store: AppStoreService) {}
+  showSuggestions: boolean = false;
+  suggestionParticipants: Participant[] = [];
+  constructor(
+    private store: AppStoreService,
+    private profiles: SimpleProfileService
+  ) {}
 
   onPriceUpdated() {
     this.store.dispatch(ActionType.UPDATE_DISH_PRICE, {
@@ -55,10 +63,15 @@ export class FoodItemPanelComponent {
   }
 
   drop(event: CdkDragDrop<string[]>) {
+    this.addParticipants(event.item.data);
+  }
+
+  addParticipants(profiles: Profile[]) {
     this.store.dispatch(ActionType.ADD_PARTICIPANT, {
-      profiles: event.item.data,
+      profiles: profiles,
       id: this.foodData.id,
     });
+    if (this.showSuggestions) this.updateSuggestions();
   }
 
   onMenuOption(option: string) {
@@ -87,6 +100,32 @@ export class FoodItemPanelComponent {
   }
   dragEnded() {
     //nothing for now
+  }
+
+  toggleQuickAddPreview(event: Event) {
+    event.preventDefault();
+    console.log('toggling quick add');
+    this.showSuggestions = !this.showSuggestions;
+    if (this.showSuggestions) {
+      this.updateSuggestions();
+    }
+  }
+
+  updateSuggestions() {
+    const profiles = this.profiles.getCurrentProfiles();
+    const currentParticipantsSet = new Set(
+      this.participants.map((p) => p.profile.name)
+    );
+    const profileSuggestions = profiles
+      .filter((profile) => !currentParticipantsSet.has(profile.name))
+      .slice(0, 5);
+    this.suggestionParticipants = profileSuggestions.map(
+      (profile) => new Participant(profile, 0)
+    );
+  }
+
+  addPreviewParticipant(participant: Participant) {
+    this.addParticipants([participant.profile]);
   }
 
   get participants() {

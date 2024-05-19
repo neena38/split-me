@@ -15,19 +15,19 @@
 }
 
 .bill-card {
-  flex-basis: 75%;
+  flex-grow: 1;
 }
 
 .right-panel {
-  flex-basis: 25%;
+  width: 400px;
   display: flex;
   flex-direction: column;
   gap: 8px;
   app-details-panel{
-    flex-grow: 0.3;
+   
   }
   app-profile-list{
-    flex-grow: 1;
+
   }
 }
 

@@ -1,5 +1,6 @@
 import { CdkDragDrop, CdkDragStart } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { slideInAnimation } from 'src/app/classes/animations';
 import { ActionType } from 'src/app/classes/constants';
 import { FoodItem } from 'src/app/classes/food-item';
@@ -24,7 +25,8 @@ export class FoodItemPanelComponent {
   suggestionParticipants: Participant[] = [];
   constructor(
     private store: AppStoreService,
-    private profiles: SimpleProfileService
+    private profiles: SimpleProfileService,
+    private toastr: ToastrService
   ) {}
 
   onPriceUpdated() {
@@ -65,6 +67,7 @@ export class FoodItemPanelComponent {
 
   drop(event: CdkDragDrop<string[]>) {
     this.addParticipants(event.item.data);
+    this.showSuggestions = false;
   }
 
   addParticipants(profiles: Profile[]) {
@@ -93,6 +96,7 @@ export class FoodItemPanelComponent {
         });
         break;
     }
+    this.showSuggestions = false;
   }
 
   //drag events
@@ -105,7 +109,6 @@ export class FoodItemPanelComponent {
 
   toggleQuickAddPreview(event: Event) {
     event.preventDefault();
-    console.log('toggling quick add');
     this.showSuggestions = !this.showSuggestions;
     if (this.showSuggestions) {
       this.updateSuggestions();
@@ -114,6 +117,11 @@ export class FoodItemPanelComponent {
 
   updateSuggestions() {
     const profiles = this.profiles.getCurrentProfiles();
+    if (profiles.length == 0) {
+      this.toastr.warning('No profiles found');
+      this.showSuggestions = false;
+      return;
+    }
     const currentParticipantsSet = new Set(
       this.participants.map((p) => p.profile.name)
     );

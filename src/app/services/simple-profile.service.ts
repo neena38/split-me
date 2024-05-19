@@ -148,7 +148,6 @@ export class SimpleProfileService {
       'myProfiles',
       JSON.stringify(this.getCurrentProfiles())
     );
-    console.log(localStorage);
   }
 
   getCurrentProfiles() {

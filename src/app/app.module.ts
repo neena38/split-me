@@ -57,6 +57,7 @@ import { DarkColorDirective } from './directives/dark-color.directive';
 import { DragDropDirective } from './directives/drag-drop.directive';
 import { InputClickSelectDirective } from './directives/input-click-select.directive';
 import { HelpDialogModule } from './help-dialog/help-dialog.module';
+import { HomepageComponent } from './components/homepage/homepage.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -95,6 +96,7 @@ import { HelpDialogModule } from './help-dialog/help-dialog.module';
     WebsiteMovedDialogComponent,
     NicknameModalComponent,
     LoadingBubblesComponent,
+    HomepageComponent,
   ],
   imports: [
     BrowserModule,

@@ -18,6 +18,7 @@
           *ngIf="roomStatus == 'idle'"
           src="assets/icons/group-icon.svg"
           matTooltip="Create room"
+          alt="room-btn"
           (click)="initiateShare()"
         />
         <img
@@ -25,6 +26,7 @@
           *ngIf="roomStatus == 'connected'"
           src="assets/icons/exit-group-icon.svg"
           matTooltip="Exit room"
+          alt="room-exit"
           (click)="exitRoom()"
         />
         <app-loading-bubbles

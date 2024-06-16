@@ -3,15 +3,7 @@
     <div class="blur"></div>
   </div>
   <div class="content">
-    <div class="navbar">
-      <span class="title"><img src="../../../favicon.ico" alt="" /></span>
-      <span class="nav-options">
-        <span class="nav-option selected">Home</span>
-        <span class="nav-option">About Us</span>
-        <span class="nav-option">Contact</span>
-      </span>
-      <span class="right-options"></span>
-    </div>
+    
     <div class="main-content">
       <div class="hero">
         <h1 class="title">
@@ -28,7 +20,7 @@
         </div>
         <div class="btn-stack">
           <a routerLink="/app" class="action-btn launch">Launch App</a>
-          <button class="action-btn">Get Started</button>
+          <button class="action-btn" (click)="getStarted()">Get Started</button>
         </div>
       </div>
       <div class="banner">

@@ -1,4 +1,3 @@
-
 @import "../../styles/palette.scss";
 
 #main-wrapper {
@@ -9,7 +8,7 @@
       rgba(26, 26, 27, 0.99)
     ),
     url("../../../assets/cover/cov5.jpg");
-  
+
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -23,12 +22,6 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  app-details-panel{
-   
-  }
-  app-profile-list{
-
-  }
 }
 
 @media only screen and (max-width: 576px) {

@@ -7,13 +7,15 @@
   align-items: center;
   border-radius: 2px;
   gap: 8px;
-  border: 2px solid $border-line;
   background-color: $card-color;
+  border-radius: 20px 0 20px 0;
+  backdrop-filter: blur(8px);
+  
 
   .amounts-container {
     width: 100%;
     display: flex;
-    background-color: #29293b;
+   background-color: #29293b9f;
     padding: 20px 10px;
     padding-left: 20px;
     border-radius: 4px;
@@ -34,7 +36,7 @@
     border-radius: 4px;
     font-family: Helvetica, sans-serif;
     font-weight: bold;
-    background-color: #3e3d65;
+    background-color: #3e3d6550;
     text-transform: capitalize;
     img {
       width: 18px;

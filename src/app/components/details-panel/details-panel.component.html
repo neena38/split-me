@@ -1,4 +1,4 @@
-<div class="details-panel p-4 mb-2 card-container lead">
+<div class="details-panel shadow p-4 mb-2 card-container lead">
   <div class="amounts-container">
     <app-amount-display
       [title]="'Dish Prices'"
@@ -12,7 +12,7 @@
     ></app-amount-display>
   </div>
   <app-tax-discount-panel></app-tax-discount-panel>
-  <div class="individual-cont-panel" (click)="calcFinalTotal()">
+  <div class="individual-cont-panel shadow-sm" (click)="calcFinalTotal()">
     Inspect Expense Breakdown
     <img src="assets/icons/right-arrow-icon.svg" alt="" />
   </div>

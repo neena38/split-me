@@ -3,14 +3,14 @@
 .people-card {
   position: relative;
   background-color: $card-color;
+  border-radius: 20px 0 20px 0;
+  backdrop-filter: blur(8px);
   height: 100%;
   h3 {
     font-size: 0.75rem;
     font-family: Helvetica, sans-serif;
     font-weight: bold;
   }
-
-  border: 2px solid $border-line;
 }
 
 .import-export-container {

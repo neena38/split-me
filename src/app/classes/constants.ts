@@ -26,9 +26,10 @@ export enum ActionType {
   SCAN_RECEIPT_ACTION,
 }
 
-export enum LocalActionType{
+export enum LocalActionType {
   SET_PROFILES,
   SET_STATE,
+  SET_DUMMY_DATA,
 }
 
 export interface Action {

@@ -1,5 +1,6 @@
 import { LocalAction, LocalActionType } from '../classes/constants';
 import { FoodItem } from '../classes/food-item';
+import { mockFoodPalettes } from '../classes/mock-data';
 import { Participant } from '../classes/participant';
 import { Profile } from '../classes/profile';
 import { IApplicationState } from './store';
@@ -12,6 +13,7 @@ type ReducerFunction = (
 const reducerFunctions: { [key in LocalActionType]: ReducerFunction } = {
   [LocalActionType.SET_PROFILES]: setProfilesList,
   [LocalActionType.SET_STATE]: setAppState,
+  [LocalActionType.SET_DUMMY_DATA]: setDummyData,
 };
 
 function setProfilesList(
@@ -45,6 +47,13 @@ function setAppState(
     profiles: newState.profiles,
     palettes: newPalettes,
     modifiers: newState.modifiers,
+  };
+}
+
+function setDummyData(state: IApplicationState, payload: {}) {
+  return {
+    ...state,
+    palettes: mockFoodPalettes,
   };
 }
 

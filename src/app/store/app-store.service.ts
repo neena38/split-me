@@ -26,10 +26,6 @@ export class AppStoreService {
       },
       withProps<IApplicationState>(initialState)
     );
-
-    this.store.subscribe((data) => {
-      console.log(data);
-    });
   }
 
   dispatch(type: ActionType, payload: any) {
@@ -53,6 +49,7 @@ export class AppStoreService {
     formatActions(action);
     this.store.update((state) => actionReducer(state, action));
     const message = generateMessage(action, this.store.getValue().palettes);
+    //TODO add toast
     console.log(message);
   }
 

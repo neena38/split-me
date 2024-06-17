@@ -27,8 +27,6 @@ export class ProfileListComponent {
 
   onAddProfile() {
     const existingProfiles = this.simpleProfile.getCurrentProfiles();
-    console.log(existingProfiles);
-
     let dialogRef = this.dialog.open(CreateProfileModalComponent, {
       width: '250px',
       data: existingProfiles,

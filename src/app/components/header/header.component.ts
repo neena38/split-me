@@ -25,6 +25,12 @@ export class HeaderComponent {
   ) {}
 
   async initiateShare() {
+    // temporarily disabling to complete backend hosting
+    this.toastr.info('Backend work in progress', 'Coming soon', {
+      titleClass: 'socket-title',
+      toastClass: 'socket-toast',
+    });
+    return;
     try {
       const roomId = await lastValueFrom(this.roomService.createRoom());
       this.router.navigate(['/room', roomId.roomId]);

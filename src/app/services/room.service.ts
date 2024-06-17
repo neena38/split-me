@@ -30,7 +30,7 @@ export class RoomService {
       this.store.getValue()
     );
   }
-  //TODO change in backend type change from AppState to ApplicationState
+  
   getRoomData(roomId: string): Observable<IApplicationState> {
     return this.http.get<IApplicationState>(`${this.apiUrl}/room/${roomId}`);
   }

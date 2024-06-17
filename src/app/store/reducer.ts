@@ -14,6 +14,7 @@ type ReducerFunction = (
 const reducerFunctions: { [key in ActionType]: ReducerFunction } = {
   [ActionType.ADD_PROFILE]: addProfile,
   [ActionType.REMOVE_PROFILE]: removeProfile,
+  [ActionType.IMPORT_PROFILE_SET]: importProfileSet,
   [ActionType.ADD_PALETTE]: addPalette,
   [ActionType.REMOVE_PALETTE]: removePalette,
   [ActionType.ADD_PARTICIPANT]: addParticipants,
@@ -56,6 +57,16 @@ function removeProfile(
   return {
     ...state,
     profiles: state.profiles.filter((x) => x.name !== name),
+  };
+}
+function importProfileSet(
+  state: IApplicationState,
+  payload: { profiles: Profile[] }
+): IApplicationState {
+  const { profiles } = payload;
+  return {
+    ...state,
+    profiles: profiles,
   };
 }
 

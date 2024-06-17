@@ -1,14 +1,14 @@
 import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
+import * as saveAs from 'file-saver';
 import { ToastrService } from 'ngx-toastr';
 import { Observable, Subject } from 'rxjs';
+import { randomBetween } from '../classes/commons';
 import { ActionType, LocalActionType } from '../classes/constants';
 import { selectionStatus } from '../classes/interfaces';
 import { Profile } from '../classes/profile';
 import { AppStoreService } from '../store/app-store.service';
 import { profilesSelector } from '../store/selectors';
 import { JsonValidatorService } from './json-validator.service';
-import * as saveAs from 'file-saver';
-import { randomBetween } from '../classes/commons';
 
 @Injectable({
   providedIn: 'root',
@@ -107,7 +107,6 @@ export class SimpleProfileService {
   }
 
   importProfiles(file: any) {
-    //TODO ADD BULK ADD ACTION
     let fileReader = new FileReader();
     fileReader.onload = () => {
       try {
@@ -115,12 +114,15 @@ export class SimpleProfileService {
         if (fileReader.result)
           impData = JSON.parse(fileReader.result as string);
         if (this.checkValid(impData)) {
-          //   this.profiles = impData;
+          this.store.dispatch(ActionType.IMPORT_PROFILE_SET, {
+            profiles: impData,
+          });
+
           this.setLocalStorage();
-          //     this.toastr.success(
-          //       `successfully imported ${this.profiles.length} profiles`,
-          //       'Success'
-          //     );
+          this.toastr.success(
+            `successfully imported ${impData.length} profiles`,
+            'Success'
+          );
         } else {
           this.toastr.error('Invalid profile file');
         }
@@ -133,7 +135,6 @@ export class SimpleProfileService {
   }
 
   fetchFromLocalStorage() {
-    //TODO BULK ADD ACTION
     let profiles = localStorage.getItem('myProfiles');
     if (profiles != null) {
       let json = JSON.parse(profiles);

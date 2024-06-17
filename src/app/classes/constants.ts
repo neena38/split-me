@@ -11,6 +11,7 @@ export enum ReceiptType {
 export enum ActionType {
   ADD_PROFILE,
   REMOVE_PROFILE,
+  IMPORT_PROFILE_SET,
   ADD_PALETTE,
   REMOVE_PALETTE,
   ADD_PARTICIPANT,
